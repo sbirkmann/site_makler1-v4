@@ -54,7 +54,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
         <div className="mx-auto flex h-[var(--header-height)] w-full max-w-[1552px] items-center justify-between gap-3 px-4 sm:px-8">
           <Logo tone={onImage ? "light" : "dark"} className="min-w-0 flex-1 overflow-hidden xl:flex-none" />
 
-          <nav aria-label="Hauptnavigation" className="hidden items-center gap-1 xl:flex">
+          <nav aria-label="Hauptnavigation" className="hidden min-w-0 items-center gap-1 xl:flex">
             {mainNav.map((item) => {
               const active =
                 pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
@@ -93,11 +93,11 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
             })}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
             <Link
               href="/immobilienbewertung"
               className={cn(
-                "hidden items-center gap-2 rounded-[var(--radius-sm)] px-4 py-3 text-[1.125rem] font-medium transition-colors lg:flex",
+                "hidden items-center gap-2 whitespace-nowrap rounded-[var(--radius-sm)] px-3 py-3 text-[0.9375rem] font-medium transition-colors 2xl:flex",
                 onImage ? "text-white/85 hover:text-white" : "text-ink-muted hover:text-primary-900",
               )}
             >
