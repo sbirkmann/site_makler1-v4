@@ -20,16 +20,11 @@ type Stat = {
 };
 
 const stats: Stat[] = [
-  { prefix: "Erfahrung seit", value: site.founded, label: "", plain: true },
-  { value: site.stats.propertiesSold, label: "vermittelte Immobilien" },
+  { prefix: "seit", value: site.founded, label: "am Markt", plain: true },
+  { prefix: "über", value: site.stats.propertiesSold, label: "vermittelte Immobilien" },
   { prefix: "über", value: site.stats.happyClients, label: "betreute Kundinnen und Kunden" },
-  { value: site.stats.yearsExperience, label: "Jahre am rheinischen Markt" },
-  {
-    prefix: "über",
-    value: 340,
-    suffix: " Mio.",
-    label: "vermitteltes Volumen",
-  },
+  { prefix: "rund", value: site.stats.yearsExperience, label: "Jahre Erfahrung" },
+  { prefix: "über", value: 340, suffix: " Mio.", label: "vermitteltes Volumen" },
 ];
 
 function useCountUp(target: number, run: boolean, decimals = 0, plain = false) {
@@ -66,21 +61,19 @@ function useCountUp(target: number, run: boolean, decimals = 0, plain = false) {
 function StatItem({ stat, run }: { stat: Stat; run: boolean }) {
   const shown = useCountUp(stat.value, run, stat.decimals ?? 0, stat.plain);
   return (
+    // Feste Zeilenhoehen fuer Prefix und Zahl: so liegen die Zahlen aller
+    // Kennzahlen auf einer Linie und die Labels beginnen gemeinsam darunter.
     <div className="text-center">
-      {stat.prefix ? (
-        <p className="text-[0.75rem] font-light uppercase tracking-[0.16em] text-white/70">
-          {stat.prefix}
-        </p>
-      ) : null}
-      <p className="font-[family-name:var(--font-display)] text-[2.25rem] font-semibold leading-none text-white sm:text-[2.75rem]">
+      <p className="h-5 text-[0.75rem] font-light uppercase tracking-[0.16em] text-white/70">
+        {stat.prefix}
+      </p>
+      <p className="font-[family-name:var(--font-display)] text-[2.25rem] font-semibold leading-[1.15] text-white sm:text-[2.75rem]">
         {shown}
         {stat.suffix}
       </p>
-      {stat.label ? (
-        <p className="mx-auto mt-2 max-w-[14rem] text-[0.8125rem] font-light leading-snug text-white/75">
-          {stat.label}
-        </p>
-      ) : null}
+      <p className="mx-auto mt-2 max-w-[13rem] text-[0.8125rem] font-light leading-snug text-white/75">
+        {stat.label}
+      </p>
     </div>
   );
 }

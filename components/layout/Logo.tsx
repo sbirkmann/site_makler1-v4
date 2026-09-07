@@ -3,8 +3,9 @@ import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
 
 /**
- * Wortmarke mit eigenem Bildzeichen: zwei ineinandergreifende Dachformen,
- * die den Anfangsbuchstaben andeuten. Bewusst geometrisch und flexibel.
+ * Bildmarke im Stil der Referenz: ein kompaktes, olivfarbenes Quadrat mit
+ * einer Dachsilhouette; der Giebel ist in Markenorange gesetzt und bildet
+ * den einzigen Akzent. Daneben die Wortmarke in Versalien.
  */
 export function Logo({
   className,
@@ -25,31 +26,36 @@ export function Logo({
         aria-hidden="true"
         className="h-9 w-9 shrink-0 sm:h-11 sm:w-11"
       >
+        {/* Grundflaeche: oliv, kantig – ueber dem Bild eine helle Aufhellung. */}
         <rect
           width="34"
           height="34"
-          rx="9"
-          className={tone === "light" ? "fill-white/12" : "fill-primary-900"}
+          rx="2"
+          className={tone === "light" ? "fill-white/15" : "fill-primary-800"}
         />
+        {/* Dach: der Giebel traegt den orangen Markenakzent. */}
         <path
-          d="M8 20.4 13.4 14l3.6 4.3 3.6-4.3L26 20.4"
-          stroke={tone === "light" ? "#ffffff" : "#1f63c7"}
-          strokeWidth="1.9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M6.6 16.8 17 8.4l10.4 8.4"
+          stroke="#ff6d00"
+          strokeWidth="2.4"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
         />
+        {/* Baukoerper als offene Kontur. */}
         <path
-          d="M11.6 20.4v4.2h10.8v-4.2"
-          stroke={tone === "light" ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.72)"}
-          strokeWidth="1.9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M9.8 18.6v7h14.4v-7"
+          stroke={tone === "light" ? "#ffffff" : "#ffffff"}
+          strokeWidth="2.1"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
         />
+        {/* Fensteroeffnung – ruhiger Gegenpol zur Dachlinie. */}
+        <rect x="15.2" y="20.4" width="3.6" height="5.2" fill="#ff6d00" />
       </svg>
       <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            "truncate font-[family-name:var(--font-display)] text-[1.125rem] font-bold tracking-[-0.015em] sm:text-[1.5rem]",
+            "truncate font-[family-name:var(--font-display)] text-[1rem] font-semibold uppercase tracking-[0.02em] sm:text-[1.25rem]",
             tone === "light" ? "text-white" : "text-primary-950",
           )}
         >
@@ -57,7 +63,7 @@ export function Logo({
         </span>
         <span
           className={cn(
-            "mt-[3px] hidden truncate text-[0.8125rem] font-normal tracking-[0.01em] sm:block",
+            "mt-[3px] hidden truncate text-[0.6875rem] font-light uppercase tracking-[0.14em] sm:block",
             tone === "light" ? "text-white/55" : "text-ink-subtle",
           )}
         >
@@ -73,7 +79,7 @@ export function Logo({
     <Link
       href={href}
       aria-label={`${site.name} – Startseite`}
-      className={cn("min-w-0 max-w-full rounded-[var(--radius-sm)]", className)}
+      className={cn("min-w-0 max-w-full rounded-[var(--radius-xs)]", className)}
     >
       {content}
     </Link>

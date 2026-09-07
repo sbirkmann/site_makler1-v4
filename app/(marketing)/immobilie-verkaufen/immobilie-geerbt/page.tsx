@@ -97,6 +97,8 @@ export default function ImmobilieGeerbtPage() {
         eyebrow="Immobilie verkaufen"
         title={topic.title}
         lead={excerpt}
+        image={topic.image}
+        imageAlt={topic.imageAlt}
       />
 
       <Section>

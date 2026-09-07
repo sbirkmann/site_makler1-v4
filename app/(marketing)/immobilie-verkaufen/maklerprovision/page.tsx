@@ -79,6 +79,8 @@ export default function MaklerprovisionPage() {
         eyebrow="Immobilie verkaufen"
         title={topic.title}
         lead={excerpt}
+        image={topic.image}
+        imageAlt={topic.imageAlt}
       />
 
       <Section>

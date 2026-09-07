@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { findAgents } from "@/lib/repositories/agents";
@@ -224,12 +225,16 @@ export default async function AboutPage() {
               description="Wir arbeiten dort, wo wir die Straßen kennen – nicht nur die Postleitzahlen."
             />
           </Reveal>
+          {/* Jeder Ort fuehrt direkt in die Objektsuche mit vorbelegtem Filter. */}
           <ul className="mt-10 flex flex-wrap justify-center gap-3">
             {site.regions.map((region, i) => (
-              <Reveal key={region} delay={i * 60}>
-                <li className="rounded-full border border-line bg-surface px-5 py-2.5 text-[0.9375rem] text-primary-900">
+              <Reveal key={region} delay={i * 60} as="li">
+                <Link
+                  href={`/immobilien?ort=${encodeURIComponent(region)}`}
+                  className="block rounded-full border border-line bg-surface px-5 py-2.5 text-[0.9375rem] text-primary-900 transition-colors hover:border-accent-500 hover:bg-accent-500 hover:text-white"
+                >
                   {region}
-                </li>
+                </Link>
               </Reveal>
             ))}
           </ul>
