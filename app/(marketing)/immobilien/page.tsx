@@ -12,7 +12,6 @@ import type { PropertyQuery } from "@/lib/repositories/properties";
 import { formatArea, formatNumber, formatPrice, formatRooms } from "@/lib/utils";
 import { Container, Section } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Reveal } from "@/components/ui/Reveal";
 import {
   PropertyEmptyState,
   PropertyGrid,

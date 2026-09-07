@@ -296,8 +296,8 @@ export async function saveBlogApiSettingsAction(formData: FormData) {
   await requireSession();
   await prisma.blogApiSettings.upsert({
     where: { id: "default" },
-    create: { id: "default", enabled: formData.get("enabled") === "on", allowUnauthenticated: formData.get("allowUnauthenticated") === "on", apiKey: String(formData.get("apiKey") ?? "").trim() || null },
-    update: { enabled: formData.get("enabled") === "on", allowUnauthenticated: formData.get("allowUnauthenticated") === "on", apiKey: String(formData.get("apiKey") ?? "").trim() || null },
+    create: { id: "default", enabled: formData.get("enabled") === "on", allowUnauthenticated: false, apiKey: String(formData.get("apiKey") ?? "").trim() || null },
+    update: { enabled: formData.get("enabled") === "on", allowUnauthenticated: false, apiKey: String(formData.get("apiKey") ?? "").trim() || null },
   });
   revalidatePath("/admin/schnittstellen");
   redirect("/admin/schnittstellen?blogApi=gespeichert");

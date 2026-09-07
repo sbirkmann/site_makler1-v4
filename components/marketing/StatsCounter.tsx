@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { site } from "@/lib/site";
 import { Container } from "@/components/ui/Container";
 
@@ -9,6 +9,22 @@ import { Container } from "@/components/ui/Container";
  * Erscheinen hoch. Die Animation laeuft nur einmal und respektiert
  * `prefers-reduced-motion` – dann steht der Endwert sofort.
  */
+/**
+ * Liest `prefers-reduced-motion` ohne Zustandswechsel im Effekt und bleibt
+ * dabei serverseitig stabil (dort immer `false`).
+ */
+function useReducedMotion(): boolean {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false,
+  );
+}
+
 type Stat = {
   prefix?: string;
   value: number;
@@ -28,28 +44,27 @@ const stats: Stat[] = [
 ];
 
 function useCountUp(target: number, run: boolean, decimals = 0, plain = false) {
-  const [value, setValue] = useState(run ? target : 0);
+  const [progress, setProgress] = useState(0);
+
+  // Bei reduzierter Bewegung wird nicht animiert – der Endwert ergibt sich
+  // dann direkt aus `run`, ohne Zustandswechsel im Effekt.
+  const reduce = useReducedMotion();
+  const value = reduce ? (run ? target : 0) : target * progress;
 
   useEffect(() => {
-    if (!run) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setValue(target);
-      return;
-    }
+    if (!run || reduce) return;
     const duration = 1600;
     const start = performance.now();
     let frame = 0;
     const tick = (now: number) => {
       const p = Math.min((now - start) / duration, 1);
       // Ease-out, damit die Zahl weich einrastet statt hart zu stoppen.
-      const eased = 1 - Math.pow(1 - p, 3);
-      setValue(target * eased);
+      setProgress(1 - Math.pow(1 - p, 3));
       if (p < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [run, target]);
+  }, [run, reduce]);
 
   if (plain) return String(Math.round(value));
   return value.toLocaleString("de-DE", {

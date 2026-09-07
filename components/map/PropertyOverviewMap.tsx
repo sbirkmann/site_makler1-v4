@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PropertyMap, type MapMarker } from "@/components/map/PropertyMap";
+import { MapConsent } from "@/components/map/MapConsent";
 import { cn } from "@/lib/utils";
 import { IconLocation } from "@/components/icons";
 
@@ -43,11 +44,13 @@ export function PropertyOverviewMap({
 
       {open ? (
         <div className="border-t border-line p-4">
-          <PropertyMap
-            markers={markers}
-            className="aspect-[16/10] w-full sm:aspect-[16/8]"
-            zoom={12}
-          />
+          <MapConsent height="aspect-[16/10] w-full sm:aspect-[16/8]">
+            <PropertyMap
+              markers={markers}
+              className="aspect-[16/10] w-full sm:aspect-[16/8]"
+              zoom={12}
+            />
+          </MapConsent>
         </div>
       ) : null}
     </div>

@@ -13,8 +13,11 @@ export async function POST(request: Request) {
   const settings = await prisma.blogApiSettings.findUnique({ where: { id: "default" } });
   if (!settings?.enabled) return Response.json({ error: "Blog-API ist deaktiviert." }, { status: 404 });
 
+  // Der Schluessel wird immer geprueft. Das frühere `allowUnauthenticated`
+  // hob die Pruefung vollstaendig auf – dann konnte jeder Beitraege
+  // veroeffentlichen. Die Einstellung bleibt im Schema, wirkt hier aber nicht.
   const provided = request.headers.get("x-api-key") ?? "";
-  if (!settings.allowUnauthenticated && (!settings.apiKey || !same(provided, settings.apiKey))) {
+  if (!settings.apiKey || !same(provided, settings.apiKey)) {
     return Response.json({ error: "Nicht autorisiert." }, { status: 401 });
   }
 

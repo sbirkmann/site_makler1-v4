@@ -8,7 +8,6 @@ import { mainNav } from "@/components/layout/nav";
 import { Logo } from "@/components/layout/Logo";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { NavDropdown } from "@/components/layout/NavDropdown";
-import { ButtonLink } from "@/components/ui/Button";
 import { IconMenu, IconValuation } from "@/components/icons";
 
 /**
@@ -51,10 +50,10 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
             "fixed inset-x-0 top-0 bg-surface/92 backdrop-blur-xl shadow-[0_4px_24px_-14px_rgba(16,31,54,0.35)]",
         )}
       >
-        <div className="mx-auto flex h-[var(--header-height)] w-full max-w-[1552px] items-center justify-between gap-3 px-4 sm:px-8">
-          <Logo tone={onImage ? "light" : "dark"} className="min-w-0 flex-1 overflow-hidden xl:flex-none" />
+        <div className="mx-auto flex h-[var(--header-height)] w-full max-w-[1552px] items-center justify-between gap-3 pl-4 sm:pl-8">
+          <Logo tone={onImage ? "light" : "dark"} className="min-w-0 flex-1 overflow-hidden 2xl:flex-none" />
 
-          <nav aria-label="Hauptnavigation" className="hidden min-w-0 items-center gap-1 xl:flex">
+          <nav aria-label="Hauptnavigation" className="hidden min-w-0 items-center gap-1 2xl:flex">
             {mainNav.map((item) => {
               const active =
                 pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
@@ -70,7 +69,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative rounded-[var(--radius-sm)] px-4 py-3 text-[1.125rem] font-medium transition-colors",
+                    "relative rounded-[var(--radius-sm)] px-2.5 py-3 text-[0.9375rem] font-medium transition-colors 2xl:px-4 2xl:text-[1.0625rem]",
                     onImage
                       ? active
                         ? "text-white"
@@ -93,26 +92,43 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
             })}
           </nav>
 
-          <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
+          <div className="flex min-w-0 shrink items-center gap-2 pr-4 sm:pr-0">
+            {/* Kontakt steht als Textlink in der Zeile; der auffaellige Platz
+                ganz rechts gehoert der Bewertung. */}
             <Link
-              href="/immobilienbewertung"
+              href="/kontakt"
               className={cn(
-                "hidden items-center gap-2 whitespace-nowrap rounded-[var(--radius-sm)] px-3 py-3 text-[0.9375rem] font-medium transition-colors 2xl:flex",
+                "hidden items-center whitespace-nowrap px-2.5 py-3 text-[0.9375rem] font-medium transition-colors 2xl:flex 2xl:px-3",
                 onImage ? "text-white/85 hover:text-white" : "text-ink-muted hover:text-primary-900",
               )}
             >
-              <IconValuation size={20} className={onImage ? "text-accent-300" : "text-primary-600"} />
-              Kostenlos bewerten
+              Kontakt
             </Link>
 
-            <ButtonLink
-              href="/kontakt"
-              size="md"
-              variant="accent"
-              className="h-auto shrink-0 px-4 py-2.5 text-[0.6875rem] sm:px-6 sm:py-4 sm:text-[0.75rem]"
+            {/* Zwischen lg und 2xl reicht die Zeile fuer den breiten Block
+                nicht; dort steht dieselbe Aktion kompakt. */}
+            <Link
+              href="/immobilienbewertung"
+              className="hidden h-[var(--header-height)] shrink-0 items-center gap-2 bg-accent-500 px-4 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-600 lg:flex 2xl:hidden"
             >
-              Kontakt
-            </ButtonLink>
+              <IconValuation size={17} />
+              Bewerten
+            </Link>
+
+            {/* Randloser oranger Block in voller Headerhoehe – der einzige
+                Punkt im Header, der Farbe traegt. */}
+            <Link
+              href="/immobilienbewertung"
+              className="hidden h-[var(--header-height)] shrink-0 flex-col justify-center gap-0.5 bg-accent-500 px-5 text-white transition-colors hover:bg-accent-600 2xl:flex"
+            >
+              <span className="text-[0.625rem] font-light uppercase tracking-[0.14em] opacity-90">
+                Jetzt kostenfrei
+              </span>
+              <span className="flex items-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-[0.06em]">
+                <IconValuation size={17} />
+                Immobilie bewerten
+              </span>
+            </Link>
 
             <button
               type="button"
@@ -120,7 +136,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
               aria-label="Menü öffnen"
               aria-expanded={menuOpen}
               className={cn(
-                "flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] border transition-colors xl:hidden",
+                "flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] border transition-colors 2xl:hidden",
                 onImage
                   ? "border-white/30 text-white hover:border-white/60 hover:bg-white/10"
                   : "border-line-strong text-primary-900 hover:border-primary-400",

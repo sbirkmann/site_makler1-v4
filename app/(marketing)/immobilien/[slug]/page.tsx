@@ -22,6 +22,7 @@ import { PropertyFacts, FeatureList, type Fact } from "@/components/property/Pro
 import { PropertyInquiryForm } from "@/components/property/PropertyInquiryForm";
 import { PropertyGrid } from "@/components/property/PropertyGrid";
 import { PropertyMap } from "@/components/map/PropertyMap";
+import { MapConsent } from "@/components/map/MapConsent";
 import {
   IconArea,
   IconBath,
@@ -297,8 +298,9 @@ export default async function PropertyDetailPage({
 
                     {hasPosition ? (
                       <>
+                        <MapConsent className="mt-6" height="aspect-[16/9] w-full">
                         <PropertyMap
-                          className="mt-6 aspect-[16/9] w-full"
+                          className="aspect-[16/9] w-full"
                           approximate
                           zoom={14}
                           markers={[
@@ -311,6 +313,7 @@ export default async function PropertyDetailPage({
                             },
                           ]}
                         />
+                        </MapConsent>
                         <p className="mt-3 text-[0.8125rem] text-ink-subtle">
                           Der markierte Bereich zeigt die ungefähre Lage. Die genaue Adresse
                           teilen wir im Rahmen der Besichtigung mit.

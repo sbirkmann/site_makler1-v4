@@ -45,6 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${site.url}/kontakt`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/impressum`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${site.url}/datenschutz`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${site.url}/widerruf`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   return [

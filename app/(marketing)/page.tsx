@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
-import { findFeaturedProperties, findPropertyCities } from "@/lib/repositories/properties";
+import {
+  countProperties,
+  findFeaturedProperties,
+  findPropertyCities,
+} from "@/lib/repositories/properties";
 import { findReviews, getReviewSummary } from "@/lib/repositories/reviews";
 import { findBlogPosts } from "@/lib/repositories/blog";
 import { formatDate } from "@/lib/utils";
@@ -16,6 +20,8 @@ import { ChoiceTiles } from "@/components/marketing/ChoiceTiles";
 import { StatsCounter } from "@/components/marketing/StatsCounter";
 import { GuideTeasers } from "@/components/marketing/GuideTeasers";
 import { OfficeInvite } from "@/components/marketing/OfficeInvite";
+import { OrangeStatBar } from "@/components/marketing/OrangeStatBar";
+import { SearchBandOlive } from "@/components/marketing/SearchBandOlive";
 import { Credentials } from "@/components/marketing/Credentials";
 import { Services } from "@/components/marketing/Services";
 import { ProcessSteps } from "@/components/marketing/ProcessSteps";
@@ -55,17 +61,20 @@ const values = [
 ];
 
 export default async function HomePage() {
-  const [featured, cities, reviews, summary, posts] = await Promise.all([
+  const [featured, cities, reviews, summary, posts, propertyCount] = await Promise.all([
     findFeaturedProperties(6),
     findPropertyCities(),
     findReviews(3),
     getReviewSummary(),
     findBlogPosts({ take: 3 }),
+    countProperties(),
   ]);
 
   return (
     <>
       <Hero cities={cities} />
+
+      <OrangeStatBar count={propertyCount} />
 
       {/* Einstieg wie in der Referenz: kurze Einordnung, dann die drei
           grossen Auswahlkacheln und das Kennzahlenband. */}
@@ -262,6 +271,8 @@ export default async function HomePage() {
       </Section>
 
       <FAQ />
+
+      <SearchBandOlive cities={cities} />
 
       <CTASection
         eyebrow="Persönlich statt anonym"

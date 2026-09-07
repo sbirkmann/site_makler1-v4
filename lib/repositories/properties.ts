@@ -193,7 +193,9 @@ export async function findProperties(query: PropertyQuery) {
 
 export async function findFeaturedProperties(take = 6) {
   return prisma.property.findMany({
-    where: { publishedAt: { not: null }, featured: true },
+    // `lte` wie in buildWhere(): ein in der Zukunft datiertes Objekt darf
+    // hier nicht auftauchen, waehrend die Liste es noch ausblendet.
+    where: { publishedAt: { not: null, lte: new Date() }, featured: true },
     orderBy: [{ publishedAt: "desc" }],
     select: propertyCardSelect,
     take,
@@ -202,7 +204,7 @@ export async function findFeaturedProperties(take = 6) {
 
 export async function findLatestProperties(take = 6) {
   return prisma.property.findMany({
-    where: { publishedAt: { not: null } },
+    where: { publishedAt: { not: null, lte: new Date() } },
     orderBy: [{ publishedAt: "desc" }],
     select: propertyCardSelect,
     take,
@@ -272,7 +274,7 @@ export async function findPropertyCities() {
 }
 
 export async function countProperties() {
-  return prisma.property.count({ where: { publishedAt: { not: null } } });
+  return prisma.property.count({ where: { publishedAt: { not: null, lte: new Date() } } });
 }
 
 /**

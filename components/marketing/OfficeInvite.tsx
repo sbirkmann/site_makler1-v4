@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { site } from "@/lib/site";
-import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
 /**

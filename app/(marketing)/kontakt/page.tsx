@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/marketing/ContactForm";
 import { SearchProfileFunnel } from "@/components/funnel/SearchProfileFunnel";
 import { PropertyMap } from "@/components/map/PropertyMap";
+import { MapConsent } from "@/components/map/MapConsent";
 import { IconClock, IconLocation, IconMail, IconPhone, IconWhatsApp } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -168,6 +169,7 @@ export default async function ContactPage({
 
               {/* Anfahrt */}
               <Reveal delay={140}>
+                <MapConsent height="aspect-[16/9] w-full">
                 <PropertyMap
                   className="aspect-[16/9] w-full"
                   zoom={15}
@@ -181,6 +183,7 @@ export default async function ContactPage({
                     },
                   ]}
                 />
+                </MapConsent>
               </Reveal>
             </div>
 

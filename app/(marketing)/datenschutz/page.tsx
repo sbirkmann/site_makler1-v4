@@ -81,7 +81,32 @@ export default function DatenschutzPage() {
             Bilder lokal auszuliefern.
           </p>
 
-          <h2>7. Ihre Rechte</h2>
+          <h2>7. Kartendarstellung (OpenStreetMap)</h2>
+          <p>
+            Auf der Kontaktseite, auf den Objektseiten und in der Objektsuche können Karten
+            angezeigt werden. Das Kartenmaterial stammt von der OpenStreetMap Foundation,
+            St John&#39;s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes
+            Königreich.
+          </p>
+          <p>
+            Die Karte wird <strong>nicht automatisch geladen</strong>. Sie sehen zunächst einen
+            Hinweis und entscheiden selbst, ob Sie die Karte laden möchten. Erst danach wird eine
+            Verbindung zu den Servern von OpenStreetMap hergestellt und Ihre IP-Adresse dorthin
+            übermittelt. Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO,
+            die Sie jederzeit für die Zukunft widerrufen können, indem Sie diese Seite neu laden.
+          </p>
+          <p>
+            Ihre Entscheidung wird ausschließlich im Sitzungsspeicher Ihres Browsers
+            (<code>sessionStorage</code>) abgelegt und beim Schließen des Tabs verworfen. Es wird
+            kein Cookie gesetzt und keine Kennung an uns übermittelt. Die Datenschutzerklärung
+            von OpenStreetMap finden Sie unter{" "}
+            <a href="https://osmfoundation.org/wiki/Privacy_Policy">
+              osmfoundation.org/wiki/Privacy_Policy
+            </a>
+            .
+          </p>
+
+          <h2>8. Ihre Rechte</h2>
           <p>Ihnen stehen folgende Rechte zu:</p>
           <ul>
             <li>Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -92,7 +117,7 @@ export default function DatenschutzPage() {
             <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
           </ul>
 
-          <h2>8. Kontakt in Datenschutzfragen</h2>
+          <h2>9. Kontakt in Datenschutzfragen</h2>
           <p>
             Für Auskünfte und zur Ausübung Ihrer Rechte wenden Sie sich an: {site.contact.email}
           </p>
