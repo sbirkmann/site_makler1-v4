@@ -109,7 +109,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
               href="/kontakt"
               size="md"
               variant="accent"
-              className="h-auto shrink-0 rounded-[1rem] px-3 py-2.5 text-[0.9375rem] font-semibold !text-ink sm:px-4 sm:py-4 sm:text-[1.125rem]"
+              className="h-auto shrink-0 px-4 py-2.5 text-[0.6875rem] sm:px-6 sm:py-4 sm:text-[0.75rem]"
             >
               Kontakt
             </ButtonLink>

@@ -22,7 +22,7 @@ export function FunnelLayout({
           {/* Begleitende Argumentation – auf Mobile ueber dem Formular gekuerzt */}
           <aside className="min-w-0 lg:sticky lg:top-[calc(var(--header-height)+2rem)] lg:self-start">
             <span className="eyebrow">{eyebrow}</span>
-            <h1 className="funnel-title mt-4 hyphens-auto break-words text-balance text-primary-950" lang="de">
+            <h1 className="funnel-title mt-4 hyphens-auto break-words text-balance text-accent-500" lang="de">
               {title}
             </h1>
             <p className="lead mt-5">{description}</p>
