@@ -1,0 +1,59 @@
+{
+  "name": "site_makler1-v4",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "node scripts/ensure-migrations-table.mjs && prisma migrate deploy && node scripts/seed-if-empty.mjs && node scripts/migrate-content.mjs && (tsx scripts/backfill-geocoding.ts &) && next start",
+    "lint": "eslint",
+    "db:up": "podman compose -f podman-compose.yml up -d",
+    "db:down": "podman compose -f podman-compose.yml down",
+    "db:reset": "prisma migrate reset --force",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
+    "import:openimmo": "tsx scripts/import-openimmo.ts",
+    "geocode:backfill": "tsx scripts/backfill-geocoding.ts",
+    "postinstall": "prisma generate",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "adm-zip": "^0.6.0",
+    "fast-xml-parser": "^5.11.1",
+    "leaflet": "^1.9.4",
+    "next": "16.3.4",
+    "prisma": "^6.19.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tsx": "^4.23.13",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/adm-zip": "^0.5.8",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "playwright": "^1.62.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "packageManager": "pnpm@10.20.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}

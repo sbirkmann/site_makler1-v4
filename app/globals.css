@@ -1,0 +1,428 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   Dondorf-Aesthetik – Design System (v4)
+   Referenz: dondorf.de (Peter Dondorf Immobilien, Aachen)
+   Primary   Oliv/Dunkelgruen #3E4018 – Navigation, Flaechen, Footer, Headlines
+   Accent    Orange #FF6D00        – H1, Buttons, Call-to-Action, Versalien
+   Secondary Warmes Beige #F3ECE7  – ruhige Abschnittsflaeche zwischen Weiss
+   Neutral   Weiss + warme Graustufen
+   Typografie: Montserrat, Ueberschriften in Versalien (uppercase)
+   ========================================================================= */
+
+@theme {
+  /* --- Farben ---------------------------------------------------------- */
+  --color-primary-50: #f4f5ef;
+  --color-primary-100: #e7e9db;
+  --color-primary-200: #ced2b8;
+  --color-primary-300: #adb38d;
+  --color-primary-400: #8b9366;
+  --color-primary-500: #6d754a;
+  --color-primary-600: #555c36;
+  --color-primary-700: #4a4f26;
+  --color-primary-800: #3e4018;
+  --color-primary-900: #33350f;
+  --color-primary-950: #1c2006;
+
+  --color-secondary-50: #fbf8f6;
+  --color-secondary-100: #f3ece7;
+  --color-secondary-200: #e8ddd4;
+  --color-secondary-300: #d8c7b8;
+  --color-secondary-400: #c0a894;
+  --color-secondary-500: #a68a72;
+  --color-secondary-600: #8b7059;
+  --color-secondary-700: #705a48;
+  --color-secondary-800: #59473a;
+  --color-secondary-900: #46382e;
+
+  /* Accent = Markenblau; ein Akzent statt zwei haelt die Palette ruhig */
+  --color-accent-50: #fff4e8;
+  --color-accent-100: #ffe4c7;
+  --color-accent-200: #ffc68a;
+  --color-accent-300: #ffa54d;
+  --color-accent-400: #ff8a1f;
+  --color-accent-500: #ff6d00;
+  --color-accent-600: #e05c00;
+  --color-accent-700: #b84a00;
+  --color-accent-800: #8f3a00;
+  --color-accent-900: #6b2c00;
+
+  /* Neutrale Flaechen: reines Weiss, sehr helles Grau, dunkles Anthrazit */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f3ece7;
+  --color-surface-sunken: #e8ddd4;
+  --color-surface-inverse: #3e4018;
+
+  --color-ink: #313131;
+  --color-ink-muted: #565655;
+  --color-ink-subtle: #8a8878;
+  --color-ink-inverse: #f7f5f1;
+
+  --color-line: #e4e0d8;
+  --color-line-strong: #cfc9bd;
+
+  --color-success: #1a7a4c;
+  --color-warning: #a0742a;
+  --color-danger: #b3261e;
+
+  /* --- Typografie ------------------------------------------------------ */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* --- Radien: bewusst knapper als vorher – sachlicher, weniger verspielt */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  /* --- Schatten: flacher, dezenter ---------------------------------------- */
+  --shadow-subtle: 0 1px 2px rgba(17, 24, 39, 0.04), 0 1px 3px rgba(17, 24, 39, 0.04);
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.03), 0 8px 20px -10px rgba(17, 24, 39, 0.12);
+  --shadow-lift: 0 2px 6px rgba(17, 24, 39, 0.04), 0 16px 32px -14px rgba(17, 24, 39, 0.16);
+  --shadow-float: 0 24px 48px -20px rgba(17, 24, 39, 0.24);
+
+  /* --- Spacing-Ergaenzungen -------------------------------------------- */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-30: 7.5rem;
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: light;
+  --header-height: 5.5rem;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-primary-800);
+  color: #fff;
+}
+
+/* Fokus-Sichtbarkeit konsistent halten */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Typografie-Hierarchie (Utility-Klassen) ---------------------------- */
+@layer components {
+  .display-1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.14;
+    font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  }
+  /* H1 der Unterseiten (Referenz: 40 px, Schnitt 600) */
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: var(--color-accent-500);
+    font-size: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
+  }
+  /* H1 der Funnel-Seiten (Referenz: 68 px, Schnitt 700) */
+  .funnel-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    font-size: clamp(2rem, 1.3rem + 3vw, 4.25rem);
+  }
+
+  .display-2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    font-size: clamp(1.375rem, 1.15rem + 0.9vw, 1.75rem);
+  }
+  .display-3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.25;
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  }
+  .heading-4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.1;
+    font-size: 1.375rem;
+  }
+  /* Hero-Headline: eigene Klasse statt Tailwind-Arbitrary-Value,
+     da clamp() mit Kommas dort nicht zuverlaessig geparst wird. */
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 1.18;
+    font-size: clamp(1.625rem, 0.95rem + 2.6vw, 2.875rem);
+  }
+  .hero-title-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.6px rgba(255, 255, 255, 0.95);
+  }
+  @media (max-width: 640px) {
+    .hero-title-outline {
+      -webkit-text-stroke-width: 1px;
+    }
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent-500);
+  }
+  /* Textlink in Versalien mit kurzer Akzentlinie (Inhaltsseiten) */
+  .link-caps {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-800);
+    transition: color 0.2s ease;
+  }
+  .link-caps::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1.75rem;
+    height: 2px;
+    background: var(--color-accent-400);
+    transform: translateX(-50%);
+    transition: width 0.25s var(--ease-out-quint);
+  }
+  .link-caps:hover { color: var(--color-primary-600); }
+  .link-caps:hover::after { width: 100%; }
+  .lead {
+    font-size: 1.125rem;
+    font-weight: 300;
+    line-height: 1.57;
+    color: var(--color-ink-muted);
+  }
+
+  /* Prose fuer Ratgeber-Artikel */
+  .prose-editorial {
+    max-width: 68ch;
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--color-ink);
+    /* Lange Begriffe (z. B. "Verbraucherschlichtungsstelle") duerfen umbrechen */
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  .prose-editorial > * + * { margin-top: 1.25em; }
+  .prose-editorial h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-primary-800);
+    font-size: 1.375rem;
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    margin-top: 2.25em;
+    margin-bottom: 0.2em;
+  }
+  .prose-editorial h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-primary-800);
+    font-size: 1.125rem;
+    line-height: 1.3;
+    margin-top: 1.8em;
+    margin-bottom: 0.1em;
+  }
+  .prose-editorial ul { padding-left: 1.15rem; list-style: none; }
+  .prose-editorial li { position: relative; padding-left: 1rem; margin-top: 0.5em; }
+  .prose-editorial li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.68em;
+    width: 0.375rem; height: 0.375rem;
+    border-radius: 999px;
+    background: var(--color-accent-400);
+  }
+  .prose-editorial ol { padding-left: 1.35rem; list-style: decimal; }
+  .prose-editorial ol li { padding-left: 0.25rem; }
+  .prose-editorial ol li::before { content: none; }
+  .prose-editorial strong { font-weight: 600; }
+  .prose-editorial blockquote {
+    border-left: 3px solid var(--color-accent-400);
+    padding-left: 1.25rem;
+    font-size: 1.1875rem;
+    line-height: 1.5;
+    color: var(--color-primary-800);
+  }
+}
+
+/* --- Scroll-Reveal ------------------------------------------------------ */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s var(--ease-out-quint),
+      transform 0.7s var(--ease-out-quint);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hide-scrollbar { scrollbar-width: none; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Select-Styling -----------------------------------------------------
+   Native Selects zeigen je nach Plattform sehr unterschiedliche Chrome.
+   Wir entfernen das Standardaussehen und setzen einen eigenen Pfeil ueber
+   ein Hintergrundbild – so bleibt die Bedienung nativ (wichtig auf Mobile),
+   die Optik aber konsistent.
+   ------------------------------------------------------------------------ */
+@layer components {
+  .select-field {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%238a9491' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.8 9.2 6.2 6 6.2-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.125rem;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+  .select-field:hover {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23265b61' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.8 9.2 6.2 6 6.2-6'/%3E%3C/svg%3E");
+  }
+  .select-field:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  /* Option-Liste: Firefox und Chromium respektieren diese Angaben */
+  .select-field option {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: 0.5rem;
+  }
+  .select-field option:checked {
+    background: var(--color-primary-50);
+    font-weight: 500;
+  }
+  /* Platzhalter-Option optisch zuruecknehmen */
+  .select-field:has(option[value=""]:checked) {
+    color: var(--color-ink-subtle);
+  }
+}
+
+/* Schritt-Uebergang in den Funnels */
+@keyframes funnel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Karte (Leaflet / OpenStreetMap)
+   Leaflet bringt eigenes CSS mit; hier werden nur Marker und Popup an die
+   Gestaltung der Seite angeglichen.
+--------------------------------------------------------------------------- */
+.wohnwert-marker__pin {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--color-primary-700);
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.32);
+}
+
+.wohnwert-marker__pin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.leaflet-container {
+  font: inherit;
+  background: var(--color-surface-sunken);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md, 0.5rem);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.16);
+}
+
+.leaflet-popup-content {
+  margin: 0.75rem;
+}
+
+/* Leaflet setzt sehr hohe z-index-Werte; damit bleiben Header und
+   Lightbox weiterhin ueber der Karte. */
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1;
+}
