@@ -17,11 +17,11 @@ export function PropertyFacts({ facts, className }: { facts: Fact[]; className?:
     >
       {facts.map((fact) => (
         <div key={fact.label} className="flex flex-col gap-2 bg-surface p-4 sm:p-5">
-          <span className="text-primary-500">{fact.icon}</span>
           <dt className="text-[0.75rem] uppercase tracking-[0.08em] text-ink-subtle">
             {fact.label}
           </dt>
-          <dd className="text-[1.0625rem] font-medium leading-none text-primary-950">
+          <dd className="flex flex-col gap-2 text-[1.0625rem] font-medium leading-none text-primary-950">
+            <span aria-hidden className="text-primary-500">{fact.icon}</span>
             {fact.value}
           </dd>
         </div>

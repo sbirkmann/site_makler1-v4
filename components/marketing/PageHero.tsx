@@ -21,7 +21,7 @@ export function PageHero({
 }) {
   return (
     <section className="relative h-[15rem] w-full overflow-hidden bg-primary-900 sm:h-[18rem] lg:h-[21rem]">
-      <Image src={image} alt={imageAlt ?? ""} fill priority sizes="100vw" className="object-cover" />
+      <Image src={image} alt={imageAlt ?? ""} fill priority fetchPriority="high" sizes="100vw" className="object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-950/40 to-primary-950/30" />
       <Container size="wide" className="relative flex h-full items-end pb-8">
         <div>

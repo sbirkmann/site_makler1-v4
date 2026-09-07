@@ -55,7 +55,7 @@ export function SubpageHeader({
       {image ? (
         <div className="mx-auto mt-10 w-full max-w-[1630px] px-5 sm:px-8 lg:mt-14 lg:px-10">
           <div className="relative aspect-[21/9] w-full overflow-hidden bg-surface-sunken">
-            <Image src={image} alt={imageAlt ?? ""} fill sizes="100vw" className="object-cover" priority />
+            <Image src={image} alt={imageAlt ?? ""} fill sizes="100vw" className="object-cover" priority fetchPriority="high" />
           </div>
         </div>
       ) : null}

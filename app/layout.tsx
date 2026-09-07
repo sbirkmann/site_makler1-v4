@@ -1,13 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -54,7 +48,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${inter.variable} ${montserrat.variable}`}>
+    <html lang="de" className={montserrat.variable}>
       <body>{children}</body>
     </html>
   );

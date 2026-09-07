@@ -235,7 +235,7 @@ export default async function AboutPage() {
               <Reveal key={region} delay={i * 60} as="li">
                 <Link
                   href={`/immobilien?ort=${encodeURIComponent(region)}`}
-                  className="block rounded-full border border-line bg-surface px-5 py-2.5 text-[0.9375rem] text-primary-900 transition-colors hover:border-accent-500 hover:bg-accent-500 hover:text-white"
+                  className="block rounded-full border border-line bg-surface px-5 py-2.5 text-[0.9375rem] text-primary-900 transition-colors hover:border-[var(--color-accent-onwhite)] hover:bg-[var(--color-accent-onwhite)] hover:text-white"
                 >
                   {region}
                 </Link>

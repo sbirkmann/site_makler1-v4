@@ -26,7 +26,7 @@ export function FunnelLayout({
       {/* Bildband ueber dem Funnel – wie auf den Unterseiten der Referenz. */}
       {image ? (
         <div className="relative h-[13rem] w-full overflow-hidden bg-primary-900 sm:h-[16rem] lg:h-[19rem]">
-          <Image src={image} alt={imageAlt ?? ""} fill priority sizes="100vw" className="object-cover" />
+          <Image src={image} alt={imageAlt ?? ""} fill priority fetchPriority="high" sizes="100vw" className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-950/35 to-primary-950/30" />
           <Container className="relative flex h-full items-end pb-7">
             <div>

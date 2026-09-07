@@ -142,15 +142,22 @@ function StepContent({
   return (
     <div
       className={cn(
-        "transition-opacity duration-500",
-        active ? "opacity-100" : "opacity-55",
+        // Frueher wurde der inaktive Schritt per opacity-55 zurueckgenommen –
+        // das druckte Zahl und Fliesstext auf 2,08:1 bzw. unter AA. Die
+        // Ruecknahme laeuft jetzt ueber die Farbe der Zahl allein; der Text
+        // bleibt durchgehend lesbar.
+        "transition-colors duration-500",
         align === "right" && "lg:text-right",
       )}
     >
       <span
         className={cn(
           "font-[family-name:var(--font-display)] text-[2.25rem] leading-none tracking-[-0.02em] transition-colors duration-500",
-          active ? "text-accent-400" : "text-line-strong",
+          // accent-400 erreicht auf Beige nur 2,01:1 – auch fuer grossen
+          // Text zu wenig. accent-onwhite liegt bei 3,9:1.
+          active
+            ? "text-[var(--color-accent-onwhite)]"
+            : "text-ink-subtle",
         )}
       >
         {step.number}

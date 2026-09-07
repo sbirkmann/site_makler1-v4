@@ -55,6 +55,10 @@ export default async function ReviewsPage() {
 
       <Section className="pt-8">
         <Container size="wide">
+          {/* Die Karten tragen H3. Ohne diese Zwischenueberschrift spraenge
+              die Gliederung von H1 direkt auf H3. Sie steht nur fuer
+              Screenreader – visuell traegt der Hero die Aussage bereits. */}
+          <h2 className="sr-only">Einzelne Bewertungen</h2>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {reviews.map((review, i) => (
               <Reveal key={review.id} delay={(i % 3) * 90}>

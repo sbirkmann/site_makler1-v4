@@ -233,8 +233,13 @@ export default async function HomePage() {
             {posts.map((post) => (
               <li key={post.id} className="w-[335px] shrink-0 snap-start">
                 <article className="group flex h-full flex-col">
+                  {/* Rein dekorativer Bildlink: der Titel darunter fuehrt zum
+                      selben Ziel. Ohne `aria-hidden` stuende hier ein Link
+                      ganz ohne zugaenglichen Namen im Tabpfad. */}
                   <Link
                     href={`/ratgeber/${post.slug}`}
+                    tabIndex={-1}
+                    aria-hidden
                     className="relative block aspect-[16/10] overflow-hidden rounded-[var(--radius-lg)] bg-surface-sunken"
                   >
                     {post.coverImage ? (
@@ -248,7 +253,9 @@ export default async function HomePage() {
                     ) : null}
                   </Link>
                   <div className="mt-5 flex flex-1 flex-col">
-                    <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-primary-500">
+                    {/* primary-500 erreicht auf dem beigen Abschnitt nur
+                        4,18:1; bei 11 px braucht es 4,5:1. */}
+                    <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-primary-700">
                       {post.category?.name ?? "Ratgeber"}
                     </p>
                     <h3 className="heading-4 mt-2.5 leading-snug text-primary-950">

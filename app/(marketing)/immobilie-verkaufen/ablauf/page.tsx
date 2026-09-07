@@ -184,14 +184,22 @@ export default function SellProcessPage() {
                   {phases.map((phase, i) => (
                     <div
                       key={phase.label}
-                      className={i === 1 ? "bg-accent-500 text-white" : "bg-surface-muted text-ink"}
+                      className={
+                        // accent-500 traegt weisse Schrift nur mit 2,82:1.
+                        // Farbflaechen mit Text nutzen accent-onwhite.
+                        i === 1
+                          ? "bg-[var(--color-accent-onwhite)] text-white"
+                          : "bg-surface-muted text-ink"
+                      }
                       style={{ flexBasis: `${(phase.weight / phaseTotal) * 100}%` }}
                     >
                       <div className="flex h-full min-w-0 flex-col gap-1 px-4 py-4">
                         <span
                           className={
                             "text-[0.6875rem] uppercase tracking-[0.14em] " +
-                            (i === 1 ? "text-white/80" : "text-ink-subtle")
+                            // Keine Deckkraft auf farbigem Grund – /80 faellt
+                            // unter die Schwelle.
+                            (i === 1 ? "text-white" : "text-ink-subtle")
                           }
                         >
                           {phase.label}

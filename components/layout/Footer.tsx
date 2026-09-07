@@ -94,7 +94,9 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-5 py-6 text-[0.8125rem] text-white/45 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+        {/* text-white/45 ergab auf dem Footergrund nur 4,38:1. /60 hebt die
+            Zeile auf 6,3:1, ohne sie optisch nach vorne zu holen. */}
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-5 py-6 text-[0.8125rem] text-white/60 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
           <p>
             © {year} {site.legalName}. Alle Rechte vorbehalten.
           </p>

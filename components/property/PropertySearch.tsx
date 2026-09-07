@@ -188,8 +188,8 @@ export function PropertySearch({
             <button
               type="submit"
               disabled={pending}
-              aria-label="Immobilien suchen"
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-[0.75rem] bg-accent-400 text-white transition-colors hover:bg-accent-500 disabled:opacity-60 lg:aspect-square lg:h-12 lg:w-auto lg:px-0"
+              aria-label="Immobilien finden"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-[0.75rem] bg-[var(--color-accent-onwhite)] text-white transition-colors hover:bg-accent-700 disabled:opacity-60 lg:aspect-square lg:h-12 lg:w-auto lg:px-0"
             >
               <IconSearch size={20} />
               <span className="lg:sr-only">

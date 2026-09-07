@@ -18,6 +18,7 @@ export function Hero({ cities }: { cities: string[] }) {
           alt="Modernes Wohnhaus mit großzügiger Verglasung und begrüntem Vorgarten"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover"
         />

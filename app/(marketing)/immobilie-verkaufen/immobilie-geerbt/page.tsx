@@ -129,7 +129,7 @@ export default function ImmobilieGeerbtPage() {
                         Schritt {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="flex items-baseline gap-2">
-                        <span className="font-[family-name:var(--font-display)] text-[2.75rem] leading-none text-accent-500">
+                        <span className="font-[family-name:var(--font-display)] text-[2.75rem] leading-none text-[var(--color-accent-onwhite)]">
                           {d.figure}
                         </span>
                         <span className="text-[0.875rem] uppercase tracking-[0.12em] text-ink-muted">{d.unit}</span>
@@ -214,7 +214,7 @@ export default function ImmobilieGeerbtPage() {
                 <ol className="mt-3 grid gap-px bg-line md:grid-cols-3">
                   {helps.map((h, i) => (
                     <li key={h.title} className="flex flex-col gap-3 bg-surface-muted p-6">
-                      <span className="font-[family-name:var(--font-display)] text-[1.5rem] text-accent-500">
+                      <span className="font-[family-name:var(--font-display)] text-[1.5rem] text-accent-700">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="heading-4 text-ink">{h.title}</span>

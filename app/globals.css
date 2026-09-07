@@ -61,7 +61,12 @@
 
   --color-ink: #313131;
   --color-ink-muted: #565655;
-  --color-ink-subtle: #8a8878;
+  /* War #8a8878 – auf Weiss nur 3,58:1 und damit unter AA fuer normalen
+     Text. Die Farbe traegt fast ausschliesslich kleine Schrift (Meta-
+     Zeilen, Claim, Datumsangaben) und steht auch auf Beige; dort ist der
+     Abstand am knappsten. #666453 haelt den olivgrauen Charakter und
+     erreicht 5,98:1 auf Weiss, 5,11:1 auf Beige. */
+  --color-ink-subtle: #615f4f;
   --color-ink-inverse: #f7f5f1;
 
   --color-line: #e4e0d8;
@@ -157,7 +162,9 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.01em;
     line-height: 1.2;
-    color: var(--color-accent-500);
+    /* Grosser Text braucht 3:1; accent-500 erreicht nur 2,82:1.
+       accent-onwhite liegt bei 4,56:1. */
+    color: var(--color-accent-onwhite);
     font-size: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
   }
   /* H1 der Funnel-Seiten (Referenz: 68 px, Schnitt 700) */
@@ -218,7 +225,9 @@ body {
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-accent-500);
+    /* 12 px zaehlt als normaler Text und braucht 4,5:1. accent-500 liegt
+       auf Weiss bei 2,82:1, accent-700 bei 5,23:1. */
+    color: var(--color-accent-700);
   }
   /* Textlink in Versalien mit kurzer Akzentlinie (Inhaltsseiten) */
   .link-caps {

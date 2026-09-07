@@ -106,3 +106,85 @@ statt in einem eigenen Scrollcontainer.
 
 Grund: Eine Objektsuche, die ohne JavaScript nichts anzeigt, ist für
 Suchmaschinen und für Nutzer mit eingeschränkter Umgebung wertlos.
+
+## E-08 · Karte auf MapLibre GL JS umgestellt
+
+E-02 hat den Wechsel bis zum Neubau der Suche zurückgestellt. Mit der
+Split-View ist dieser Zeitpunkt erreicht, deshalb ist die Suchkarte jetzt
+**MapLibre GL JS** (`components/map/SearchMap.tsx`).
+
+Ausschlaggebend war nicht die Optik, sondern das Clustering. Leaflet kann
+das nur über ein zusätzliches Plugin (`leaflet.markercluster`), also eine
+zweite neue Abhängigkeit; MapLibre bringt Clustering in der GeoJSON-Quelle
+mit (`cluster: true`) und liefert mit `setFeatureState` zugleich den
+Mechanismus für das bidirektionale Highlighting zwischen Liste und Karte –
+ohne dass für jedes Objekt ein DOM-Marker entsteht. Bei 300 Markern ist das
+der Unterschied zwischen 300 DOM-Knoten und einem Canvas.
+
+Die Kacheln bleiben **OSM-Raster** von `tile.openstreetmap.org`; es kommt
+also kein neuer Drittanbieter und kein API-Schlüssel dazu. MapLibre wird
+lediglich als Renderer benutzt, nicht als Vektorkachel-Dienst.
+
+**Leaflet bleibt vorerst installiert**, weil `PropertyMap` (Objektdetail,
+`/kontakt`) unverändert darauf läuft. Diese beiden Karten zeigen einen
+einzelnen Standort – dort trägt MapLibre nichts bei, und ein Umbau ohne
+Anlass wäre reiner Selbstzweck. Der zweite Kartenstapel ist bewusst
+befristet und steht als T-11 in `OPEN-ITEMS.md`.
+
+## E-09 · Umschalter Liste/Karte über `ansicht`, nicht über JavaScript
+
+Unter 1024 px ersetzt ein Umschalter den Split-View. Er ist ein Paar echter
+Links mit dem Parameter `ansicht=karte` – kein JS-Button. Damit funktioniert
+er ohne JavaScript, ist verlinkbar und im Verlauf zurücknavigierbar.
+
+`ansicht` ist ein reiner Darstellungsparameter: Er steuert nichts an der
+Ergebnismenge, geht nicht an `parsePropertySearchParams()` und wird aus dem
+Query-String für `/api/immobilien/geo` entfernt. Die bestehenden zehn
+Filterparameter bleiben unverändert.
+
+## E-10 · Objektart in der Leiste einfach, Mehrfachauswahl bleibt erhalten
+
+Die alte Seitenleiste erlaubte mehrere Objektarten als Chips. In der
+schmalen Filterleiste ist dafür kein Platz, dort steht ein einfaches
+`<select>`.
+
+Bestehende Links mit mehreren Typen (`?typ=HAUS&typ=WOHNUNG`) brechen
+trotzdem nicht: Der Server wertet weiterhin alle Werte aus, und die
+zusätzlich gewählten Typen reisen als versteckte Felder im Formular mit.
+Ein solcher Link fällt beim Absenden also nicht auf einen Typ zusammen.
+
+## E-11 · Marker als HTML-Elemente, nicht als Symbol-Ebenen
+
+Der naheliegende Weg für Pins und Cluster wären MapLibre-Symbol-Ebenen mit
+`icon-image`. Das scheitert hier an zwei Punkten:
+
+1. Eine Symbol-Ebene lässt den Style erst dann fertig laden, wenn eine
+   `glyphs`-Quelle vorhanden ist – auch ohne `text-field`. Ohne sie bleibt
+   `isStyleLoaded()` dauerhaft `false` und **keine** Ebene zeichnet. Eine
+   Glyphen-Quelle wäre ein weiterer Drittanbieter, der nach der
+   Einwilligung in OpenStreetMap zusätzlich angefragt würde.
+2. `icon-image` ist eine Layout-Eigenschaft und darf kein `feature-state`
+   auswerten – das Hervorheben des überfahrenen Objekts ginge darüber
+   ohnehin nicht.
+
+Pins und Cluster sind deshalb `maplibregl.Marker` mit eigenem DOM-Element.
+Bei höchstens 300 Objekten (`findPropertyMapMarkers`) ist das
+unproblematisch, bleibt vollständig lokal und macht die Pins nebenbei
+fokussierbar – ein `<button>` ist tastaturbedienbar, ein Canvas-Symbol
+nicht.
+
+## E-12 · Clustering im Browser statt in der GeoJSON-Quelle
+
+MapLibre kann Punkte selbst clustern (`cluster: true`). Die Cluster sind
+danach aber nur über `querySourceFeatures()` erreichbar, und das liefert
+erst Ergebnisse, wenn die Quelle Kacheln erzeugt hat – für DOM-Marker ein
+unzuverlässiger Zeitpunkt.
+
+Die Suche gruppiert deshalb selbst: Punkte, die auf dem Schirm näher als
+55 px beieinander liegen, werden zusammengefasst. Gerechnet wird in
+Bildschirmpixeln, damit das Ergebnis auf jeder Zoomstufe stimmt. Bei der
+gegebenen Obergrenze von 300 Objekten ist das eine Schleife über wenige
+hundert Punkte pro Kartenbewegung.
+
+Wächst der Bestand deutlich, ist der Wechsel auf die Quellen-Clusterung
+(oder Supercluster) der richtige Schritt – vermerkt als T-14.
