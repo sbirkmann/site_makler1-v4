@@ -188,3 +188,21 @@ hundert Punkte pro Kartenbewegung.
 
 Wächst der Bestand deutlich, ist der Wechsel auf die Quellen-Clusterung
 (oder Supercluster) der richtige Schritt – vermerkt als T-14.
+
+## E-13 · Streaming Metadata bleibt aktiv
+
+Auf `/immobilien/[slug]` stehen `<title>` und `<meta name="description">`
+hinter `</head>` (gemessen: `</head>` bei Byte 1312, Titel bei 41128).
+Lighthouse zieht dafür SEO auf 92.
+
+Das ist **kein Fehler**, sondern das Standardverhalten von Next.js 16:
+Weil `generateMetadata` hier die Datenbank abfragt, wird die Seite sofort
+ausgeliefert und die Metadaten werden nachgereicht. Bots, die JavaScript
+ausführen – Googlebot eingeschlossen –, lesen sie korrekt; Bots ohne
+JavaScript erkennt Next.js am User-Agent und liefert ihnen die Tags
+blockierend im `<head>`.
+
+Abschaltbar wäre es über `htmlLimitedBots: /.*/` in `next.config.ts`. Wir
+tun es nicht: Das kostet TTFB und LCP auf jeder Objektseite, um einen
+Messwert zu heben, der keine reale Einbuße abbildet. Die Dokumentation
+rät ausdrücklich davon ab.

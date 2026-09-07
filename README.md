@@ -414,3 +414,30 @@ Objekte, Personen, Bewertungen und Auszeichnungen dieses Projekts sind frei
 erfunden und dienen ausschließlich der Demonstration. Die Bewertungsseite weist
 ausdrücklich darauf hin. Vor einem produktiven Einsatz sind sämtliche Inhalte
 durch echte Daten zu ersetzen.
+
+---
+
+## 16. Lighthouse-Messwerte (Mobile)
+
+Lighthouse 12, Mobile-Profil (Slow-4G-Drosselung, CPU 4×), gegen den
+Produktionsbuild auf `http://localhost:3400`. `/immobilien` ist ausgenommen –
+die Seite wird derzeit umgebaut.
+
+| Route | Performance | A11y | Best Practices | SEO | LCP | CLS |
+| --- | --- | --- | --- | --- | --- | --- |
+| `/` | 91 | 100 | 100 | 100 | 3,42 s | 0,000 |
+| `/immobilienbewertung` | 98 | 100 | 100 | 100 | 2,26 s | 0,000 |
+| `/immobilie-verkaufen` | 96 | 100 | 100 | 100 | 2,78 s | 0,000 |
+| `/ueber-uns` | 99 | 100 | 100 | 100 | 2,11 s | 0,000 |
+| `/ratgeber/kaufnebenkosten-rheinland` | 95 | 100 | 100 | 100 | 2,88 s | 0,000 |
+| `/immobilien/penthouse-rheinauhafen` | 93 | 100 | 100 | 92 | 3,28 s | 0,000 |
+
+Die LCP-Spalte zeigt den von Lighthouse **hochgerechneten** Wert. Beobachtet
+wurden im selben Lauf 0,09 s bis 0,45 s; lokal verzerrt der Bildproxy
+`/_next/image`, der Motive bei kaltem Cache erst von Unsplash lädt, das
+Ergebnis. Für eine belastbare Aussage gegen die Live-Umgebung mit CDN messen.
+
+SEO 92 auf der Objektseite: `<title>` und `<meta name="description">` werden
+dort nachträglich gestreamt und landen hinter `</head>`.
+
+Einzelheiten, Ursachen und offene Punkte stehen in `PERF-REPORT.md`.

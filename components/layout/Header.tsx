@@ -151,6 +151,14 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
         </div>
       </header>
 
+      {/* Platzhalter: Sobald der nicht-ueberlagernde Header `fixed` wird, faellt
+          er aus dem Fluss. Ohne diese reservierte Hoehe ruecken die Inhalte um
+          die Headerhoehe nach oben – das war der gemessene Layout-Shift
+          (CLS 0.107 auf Seiten ohne Bild-Hero). */}
+      {!overlay && scrolled ? (
+        <div aria-hidden="true" className="h-[var(--header-height)]" />
+      ) : null}
+
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
