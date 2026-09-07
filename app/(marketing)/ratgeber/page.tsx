@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Container, Section } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/marketing/CTASection";
+import { PageHero } from "@/components/marketing/PageHero";
 import { IconArrowRight, IconClock } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -39,22 +40,19 @@ export default async function RatgeberPage({
 
   return (
     <>
+      <PageHero
+        eyebrow="Ratgeber"
+        title="Wissen, das vor der Entscheidung hilft"
+        lead="Konkrete Antworten auf die Fragen, die uns Eigentümer und Käufer am häufigsten stellen – ohne Marketingfloskeln und mit belastbaren Zahlen."
+        image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Notizen und Unterlagen auf dem Besprechungstisch"
+      />
+
       <Section className="pb-0">
         <Container size="wide">
-          <Reveal>
-            <span className="eyebrow">Ratgeber</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance">
-              Wissen, das vor der Entscheidung hilft
-            </h1>
-            <p className="lead mt-5 max-w-2xl">
-              Konkrete Antworten auf die Fragen, die uns Eigentümer und Käufer am häufigsten
-              stellen – ohne Marketingfloskeln und mit belastbaren Zahlen.
-            </p>
-          </Reveal>
-
           {/* Kategoriefilter */}
           <Reveal delay={80}>
-            <nav aria-label="Kategorien" className="mt-9 flex flex-wrap gap-2">
+            <nav aria-label="Kategorien" className="flex flex-wrap gap-2">
               <Link
                 href="/ratgeber"
                 className={cn(

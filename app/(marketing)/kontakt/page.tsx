@@ -6,6 +6,7 @@ import { findOpeningHours } from "@/lib/repositories/settings";
 import { Container, Section } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/marketing/ContactForm";
+import { PageHero } from "@/components/marketing/PageHero";
 import { SearchProfileFunnel } from "@/components/funnel/SearchProfileFunnel";
 import { PropertyMap } from "@/components/map/PropertyMap";
 import { MapConsent } from "@/components/map/MapConsent";
@@ -45,23 +46,15 @@ export default async function ContactPage({
 
   return (
     <>
-      <Section className="pb-0">
-        <Container size="wide">
-          <Reveal>
-            <span className="eyebrow">Kontakt</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance">
-              Sprechen wir über Ihre Immobilie
-            </h1>
-            <p className="lead mt-5 max-w-2xl">
-              Rufen Sie an, schreiben Sie oder nutzen Sie das Formular. Wir antworten in der Regel
-              innerhalb eines Werktages – und leiten Sie an die Person weiter, die Ihr Thema am
-              besten kennt.
-            </p>
-          </Reveal>
-        </Container>
-      </Section>
+      <PageHero
+        eyebrow="Kontakt"
+        title="Sprechen wir über Ihre Immobilie"
+        lead="Rufen Sie an, schreiben Sie oder nutzen Sie das Formular. Wir antworten in der Regel innerhalb eines Werktages – und leiten Sie an die Person weiter, die Ihr Thema am besten kennt."
+        image="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Kaffee auf dem Besprechungstisch im Maklerbüro"
+      />
 
-      <Section className="pt-8">
+      <Section>
         <Container size="wide">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
             {/* Kontaktinformationen */}

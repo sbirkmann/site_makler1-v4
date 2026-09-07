@@ -8,6 +8,7 @@ import { formatDate } from "@/lib/utils";
 import { Container, Section } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/marketing/CTASection";
+import { PageHero } from "@/components/marketing/PageHero";
 import { IconClock } from "@/components/icons";
 
 // Seiten werden beim ersten Aufruf gerendert und danach zwischengespeichert.
@@ -156,6 +157,17 @@ export default async function RatgeberArticlePage({
   return (
     <>
       <article>
+        {/* Mit Aufmacherbild traegt der Hero Rubrik und Titel; ohne Bild
+            bleibt der Titel im Textkopf stehen. In beiden Faellen genau eine H1. */}
+        {post.coverImage ? (
+          <PageHero
+            eyebrow={post.category?.name ?? "Ratgeber"}
+            title={post.title}
+            image={post.coverImage}
+            imageAlt=""
+          />
+        ) : null}
+
         <Section className="pb-0 pt-10 sm:pt-14">
           <Container size="narrow">
             <nav
@@ -178,7 +190,9 @@ export default async function RatgeberArticlePage({
               ) : null}
             </nav>
 
-            <h1 className="page-title text-balance text-primary-950">{post.title}</h1>
+            {post.coverImage ? null : (
+              <h1 className="page-title text-balance text-primary-950">{post.title}</h1>
+            )}
 
             <p className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.875rem] text-ink-subtle">
               {post.author ? (
@@ -205,23 +219,6 @@ export default async function RatgeberArticlePage({
             </p>
           </Container>
         </Section>
-
-        {post.coverImage ? (
-          <Section className="py-8">
-            <Container size="wide">
-              <div className="relative aspect-[16/8] overflow-hidden rounded-[var(--radius-xl)] bg-surface-sunken">
-                <Image
-                  src={post.coverImage}
-                  alt=""
-                  fill
-                  priority
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
-            </Container>
-          </Section>
-        ) : null}
 
         <Section className="pt-8">
           <Container size="narrow">

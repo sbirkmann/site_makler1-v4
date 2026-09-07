@@ -7,6 +7,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/marketing/CTASection";
+import { PageHero } from "@/components/marketing/PageHero";
 import { IconCompass, IconMail, IconPhone, IconShield, IconTrend, IconUsers } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -54,16 +55,19 @@ export default async function AboutPage() {
 
   return (
     <>
+      <PageHero
+        eyebrow="Über uns"
+        title="Immobilien sind selten nur eine Frage des Preises."
+        image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Blick durch die verglasten Besprechungsräume unseres Büros"
+      />
+
       {/* Markenstory */}
       <Section className="pb-0">
         <Container size="wide">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <Reveal>
-              <span className="eyebrow">Über uns</span>
-              <h1 className="page-title mt-4 text-balance">
-                Immobilien sind selten nur eine Frage des Preises.
-              </h1>
-              <div className="prose-editorial mt-6">
+              <div className="prose-editorial">
                 <p>
                   {site.name} wurde {site.founded} in Köln gegründet – von jemandem, der zehn Jahre
                   in der Projektentwicklung gearbeitet hatte und dabei gesehen hat, wie oft
@@ -95,8 +99,8 @@ export default async function AboutPage() {
                 </div>
                 <div className="relative mt-10 aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-surface-sunken">
                   <Image
-                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
-                    alt="Besprechungssituation in hellen Büroräumen"
+                    src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80"
+                    alt="Freistehendes Wohnhaus am Abend"
                     fill
                     sizes="(min-width: 1024px) 24vw, 50vw"
                     className="object-cover"

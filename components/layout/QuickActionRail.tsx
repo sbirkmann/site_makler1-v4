@@ -31,10 +31,10 @@ export function QuickActionRail() {
             <Link
               key={action.href}
               href={action.href}
-              className="group flex w-[4.5rem] flex-col items-center gap-1.5 border-b border-white/15 bg-primary-800 px-2 py-4 text-white transition-colors last:border-b-0 hover:bg-[var(--color-accent-onwhite)]"
+              className="group flex w-[5.5rem] flex-col items-center gap-1.5 border-b border-white/15 bg-primary-800 px-2 py-4 text-white transition-colors last:border-b-0 hover:bg-[var(--color-accent-onwhite)]"
             >
               <Icon size={20} />
-              <span className="text-[0.625rem] font-semibold uppercase tracking-[0.08em]">
+              <span className="text-center text-[0.625rem] font-semibold uppercase leading-tight tracking-[0.04em]">
                 {action.label}
               </span>
             </Link>
@@ -45,7 +45,7 @@ export function QuickActionRail() {
       {/* Mobil: feste Leiste unten. Der Abstandhalter im Layout verhindert,
           dass sie den Seitenfuss ueberdeckt. */}
       <nav
-        aria-label="Schnellzugriff"
+        aria-label="Schnellzugriff (Leiste unten)"
         className="fixed inset-x-0 bottom-0 z-70 grid grid-cols-4 border-t border-white/15 bg-primary-800 xl:hidden"
       >
         {actions.map((action) => {
@@ -57,7 +57,7 @@ export function QuickActionRail() {
               className="flex min-h-[3.5rem] flex-col items-center justify-center gap-1 px-1 py-2 text-white transition-colors active:bg-[var(--color-accent-onwhite)]"
             >
               <Icon size={18} />
-              <span className="text-[0.625rem] font-semibold uppercase tracking-[0.06em]">
+              <span className="text-center text-[0.625rem] font-semibold uppercase leading-tight tracking-[0.04em]">
                 {action.label}
               </span>
             </Link>
