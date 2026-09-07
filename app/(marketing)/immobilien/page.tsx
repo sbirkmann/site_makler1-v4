@@ -177,7 +177,9 @@ export default async function PropertiesPage({
   const { total } = await findProperties({ ...query, page: 1 });
   const activeCount = countActiveFilters(params);
 
-  const mapView = first(params.ansicht) === "karte";
+  const rohAnsicht = first(params.ansicht);
+  const view: "geteilt" | "liste" | "karte" =
+    rohAnsicht === "karte" ? "karte" : rohAnsicht === "liste" ? "liste" : "geteilt";
 
   // Query-String fuer den GeoJSON-Endpunkt: dieselben Filter, ohne die
   // reinen Ansichtsparameter.
@@ -210,7 +212,7 @@ export default async function PropertiesPage({
         activeCount={activeCount}
       />
 
-      <SearchSplitView query={mapQuery} contextLabel={contextLabel(params)} mapView={mapView}>
+      <SearchSplitView query={mapQuery} contextLabel={contextLabel(params)} view={view}>
         <Suspense key={key} fallback={<ResultsSkeleton />}>
           <SearchResults params={params} />
         </Suspense>

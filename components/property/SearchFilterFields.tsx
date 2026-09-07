@@ -1,5 +1,6 @@
 import { propertyTypeLabels } from "@/lib/labels";
 import type { RawSearchParams } from "@/lib/search-params";
+import { SelectField } from "@/components/property/SelectField";
 
 /**
  * Die Filterfelder der Suche – reines Server-Markup ohne Zustand.
@@ -93,16 +94,17 @@ export function MarketingField({ params, idPrefix }: { params: RawSearchParams; 
   return (
     <div>
       <CellLabel htmlFor={`${idPrefix}-marketing`}>Erwerbsart</CellLabel>
-      <select
+      <SelectField
         id={`${idPrefix}-marketing`}
         name="marketing"
         defaultValue={current === "KAUF" || current === "MIETE" ? current.toLowerCase() : ""}
         className={selectClass}
-      >
-        <option value="">Kauf und Miete</option>
-        <option value="kauf">Kauf</option>
-        <option value="miete">Miete</option>
-      </select>
+        options={[
+          { value: "", label: "Kauf und Miete" },
+          { value: "kauf", label: "Kauf" },
+          { value: "miete", label: "Miete" },
+        ]}
+      />
     </div>
   );
 }
@@ -112,19 +114,16 @@ export function TypeField({ params, idPrefix }: { params: RawSearchParams; idPre
   return (
     <div>
       <CellLabel htmlFor={`${idPrefix}-typ`}>Objektart</CellLabel>
-      <select
+      <SelectField
         id={`${idPrefix}-typ`}
         name="typ"
         defaultValue={selected[0] ?? ""}
         className={selectClass}
-      >
-        <option value="">Alle Objektarten</option>
-        {Object.entries(propertyTypeLabels).map(([value, label]) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
+        options={[
+          { value: "", label: "Alle Objektarten" },
+          ...Object.entries(propertyTypeLabels).map(([value, label]) => ({ value, label })),
+        ]}
+      />
       {/* Mehrfachauswahl bleibt erhalten: alle weiteren gewaehlten Typen
           reisen als versteckte Felder mit, damit ein geteilter Link mit
           `?typ=HAUS&typ=WOHNUNG` beim Absenden nicht auf einen Typ
@@ -136,42 +135,36 @@ export function TypeField({ params, idPrefix }: { params: RawSearchParams; idPre
   );
 }
 
-export function PriceField({ params }: { params: RawSearchParams }) {
+export function PriceField({ params, idPrefix }: { params: RawSearchParams; idPrefix: string }) {
   const rent = isRentSearch(params);
   const steps = rent ? rentPriceOptions : buyPriceOptions;
   return (
     <div>
       <CellLabel>{rent ? "Kaltmiete" : "Kaufpreis"}</CellLabel>
       <div className="flex items-center gap-1">
-        <select
+        <SelectField
+          id={`${idPrefix}-preis-min`}
           name="preis_min"
-          aria-label={rent ? "Kaltmiete von" : "Kaufpreis von"}
           defaultValue={first(params.preis_min)}
           className={selectClass}
-        >
-          <option value="">von</option>
-          {steps.map((v) => (
-            <option key={v} value={v}>
-              ab {money.format(Number(v))} €
-            </option>
-          ))}
-        </select>
+          options={[
+            { value: "", label: "von" },
+            ...steps.map((v) => ({ value: v, label: `ab ${money.format(Number(v))} €` })),
+          ]}
+        />
         <span aria-hidden="true" className="text-ink-subtle">
           –
         </span>
-        <select
+        <SelectField
+          id={`${idPrefix}-preis-max`}
           name="preis_max"
-          aria-label={rent ? "Kaltmiete bis" : "Kaufpreis bis"}
           defaultValue={first(params.preis_max)}
           className={selectClass}
-        >
-          <option value="">bis</option>
-          {steps.map((v) => (
-            <option key={v} value={v}>
-              bis {money.format(Number(v))} €
-            </option>
-          ))}
-        </select>
+          options={[
+            { value: "", label: "bis" },
+            ...steps.map((v) => ({ value: v, label: `bis ${money.format(Number(v))} €` })),
+          ]}
+        />
       </div>
     </div>
   );
@@ -181,19 +174,16 @@ export function RoomsField({ params, idPrefix }: { params: RawSearchParams; idPr
   return (
     <div>
       <CellLabel htmlFor={`${idPrefix}-zimmer`}>Zimmer</CellLabel>
-      <select
+      <SelectField
         id={`${idPrefix}-zimmer`}
         name="zimmer"
         defaultValue={first(params.zimmer)}
         className={selectClass}
-      >
-        <option value="">beliebig</option>
-        {roomOptions.map((v) => (
-          <option key={v} value={v}>
-            ab {v}
-          </option>
-        ))}
-      </select>
+        options={[
+          { value: "", label: "beliebig" },
+          ...roomOptions.map((v) => ({ value: v, label: `ab ${v}` })),
+        ]}
+      />
     </div>
   );
 }
@@ -202,19 +192,16 @@ export function AreaField({ params, idPrefix }: { params: RawSearchParams; idPre
   return (
     <div>
       <CellLabel htmlFor={`${idPrefix}-flaeche`}>Wohnfläche</CellLabel>
-      <select
+      <SelectField
         id={`${idPrefix}-flaeche`}
         name="flaeche"
         defaultValue={first(params.flaeche)}
         className={selectClass}
-      >
-        <option value="">beliebig</option>
-        {areaOptions.map((v) => (
-          <option key={v} value={v}>
-            ab {v} m²
-          </option>
-        ))}
-      </select>
+        options={[
+          { value: "", label: "beliebig" },
+          ...areaOptions.map((v) => ({ value: v, label: `ab ${v} m²` })),
+        ]}
+      />
     </div>
   );
 }
@@ -254,19 +241,13 @@ export function RadiusField({ params, idPrefix }: { params: RawSearchParams; idP
   return (
     <div>
       <CellLabel htmlFor={`${idPrefix}-umkreis`}>Umkreis</CellLabel>
-      <select
+      <SelectField
         id={`${idPrefix}-umkreis`}
         name="umkreis"
         defaultValue={first(params.umkreis)}
         className={selectClass}
-      >
-        <option value="">genauer Ort</option>
-        {radiusOptions.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+        options={[{ value: "", label: "genauer Ort" }, ...radiusOptions]}
+      />
     </div>
   );
 }
@@ -276,18 +257,13 @@ export function SortField({ params, idPrefix }: { params: RawSearchParams; idPre
   return (
     <div>
       <CellLabel htmlFor={`${idPrefix}-sort`}>Sortierung</CellLabel>
-      <select
+      <SelectField
         id={`${idPrefix}-sort`}
         name="sort"
         defaultValue={current}
         className={selectClass}
-      >
-        {sortOptions.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+        options={[...sortOptions]}
+      />
     </div>
   );
 }

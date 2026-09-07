@@ -27,13 +27,14 @@ export function SearchSplitView({
   children,
   query,
   contextLabel,
-  mapView,
+  view,
 }: {
   children: ReactNode;
   query: string;
   contextLabel?: string;
   /** Auf schmalen Viewports: Karte statt Liste zeigen (`?ansicht=karte`). */
-  mapView: boolean;
+  /** "geteilt" zeigt beide Spalten, "liste" und "karte" jeweils nur eine. */
+  view: "geteilt" | "liste" | "karte";
 }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
@@ -63,7 +64,15 @@ export function SearchSplitView({
   }, []);
 
   return (
-    <div className="lg:grid lg:h-[calc(100dvh-var(--header-height)-4.25rem)] lg:grid-cols-[minmax(0,40%)_minmax(0,60%)]">
+    <div
+      className={cn(
+        "lg:grid lg:h-[calc(100dvh-var(--header-height)-4.25rem)]",
+        // Der Umschalter wirkt auf jeder Breite: bei "liste" bzw. "karte"
+        // bekommt die sichtbare Spalte die volle Breite.
+        view === "geteilt" && "lg:grid-cols-[minmax(0,40%)_minmax(0,60%)]",
+        view !== "geteilt" && "lg:grid-cols-1",
+      )}
+    >
       {/* Ergebnisspalte: eigener Scrollcontainer ab Desktop, darunter
           scrollt sie schlicht mit der Seite. */}
       <div
@@ -71,8 +80,9 @@ export function SearchSplitView({
         onPointerOver={onPointer}
         onPointerLeave={() => setActiveId(null)}
         className={cn(
-          "bg-surface lg:overflow-y-auto lg:shadow-[4px_0_10px_0_rgba(0,0,0,0.14)]",
-          mapView && "hidden lg:block",
+          "bg-surface lg:overflow-y-auto",
+          view === "geteilt" && "lg:shadow-[4px_0_10px_0_rgba(0,0,0,0.14)]",
+          view === "karte" && "hidden",
         )}
       >
         {children}
@@ -82,7 +92,9 @@ export function SearchSplitView({
       <div
         className={cn(
           "h-[26rem] sm:h-[32rem] lg:h-full",
-          mapView ? "block" : "hidden lg:block",
+          view === "karte" && "block h-[calc(100dvh-var(--header-height)-4.25rem)]",
+          view === "liste" && "hidden",
+          view === "geteilt" && "hidden lg:block",
         )}
       >
         <MapConsent height="h-full" className="h-full">

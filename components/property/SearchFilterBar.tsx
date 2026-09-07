@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { RawSearchParams } from "@/lib/search-params";
 import { buildPropertyHref } from "@/lib/search-params";
-import { formatNumber } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 import {
   AreaField,
   HiddenPassThrough,
@@ -34,8 +34,9 @@ export function SearchFilterBar({
   total: number;
   activeCount: number;
 }) {
-  const view = Array.isArray(params.ansicht) ? params.ansicht[0] : params.ansicht;
-  const mapView = view === "karte";
+  const roh = Array.isArray(params.ansicht) ? params.ansicht[0] : params.ansicht;
+  const view: "geteilt" | "liste" | "karte" =
+    roh === "karte" ? "karte" : roh === "liste" ? "liste" : "geteilt";
 
   const cell =
     "min-w-0 border-l border-line px-3 py-2 first:border-l-0";
@@ -60,7 +61,7 @@ export function SearchFilterBar({
             <TypeField params={params} idPrefix="bar" />
           </div>
           <div className={`${cell} flex-[1.7]`}>
-            <PriceField params={params} />
+            <PriceField params={params} idPrefix="bar" />
           </div>
           <div className={`${cell} flex-[0.8]`}>
             <RoomsField params={params} idPrefix="bar" />
@@ -102,7 +103,7 @@ export function SearchFilterBar({
           </div>
 
           <div className="flex items-end py-2 pl-3">
-            <ViewToggleLinks params={params} mapView={mapView} />
+            <ViewToggleLinks params={params} view={view} />
           </div>
         </form>
 
@@ -111,11 +112,11 @@ export function SearchFilterBar({
           <FilterSheet total={total} activeCount={activeCount}>
             <form method="get" action="/immobilien" className="contents">
               <HiddenPassThrough params={params} />
-              {mapView ? <input type="hidden" name="ansicht" value="karte" /> : null}
+              {view !== "geteilt" ? <input type="hidden" name="ansicht" value={view} /> : null}
               <div className="flex flex-col gap-5 px-5 py-6">
                 <MarketingField params={params} idPrefix="sheet" />
                 <TypeField params={params} idPrefix="sheet" />
-                <PriceField params={params} />
+                <PriceField params={params} idPrefix="sheet" />
                 <RoomsField params={params} idPrefix="sheet" />
                 <AreaField params={params} idPrefix="sheet" />
                 <PlaceField params={params} idPrefix="sheet" cities={cities} />
@@ -140,7 +141,7 @@ export function SearchFilterBar({
           </FilterSheet>
 
           <div className="ml-auto">
-            <ViewToggleLinks params={params} mapView={mapView} />
+            <ViewToggleLinks params={params} view={view} />
           </div>
         </div>
       </div>
@@ -154,32 +155,62 @@ export function SearchFilterBar({
  */
 function ViewToggleLinks({
   params,
-  mapView,
+  view,
 }: {
   params: RawSearchParams;
-  mapView: boolean;
+  view: "geteilt" | "liste" | "karte";
 }) {
   const base =
-    "px-4 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-[0.06em] transition-colors";
-  const active = "bg-primary-800 text-white";
-  const idle = "bg-surface text-ink-muted hover:text-primary-800";
+    "flex items-center gap-2 px-4 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-[0.06em] transition-colors";
+  const an = "bg-primary-800 text-white";
+  const aus = "bg-surface text-ink-muted hover:text-primary-800";
+
+  // Zwei unabhaengige Schalter: jeder blendet seine Spalte ein oder aus.
+  // Beide auszuschalten ergibt keine Ansicht, deshalb schaltet der letzte
+  // aktive Schalter stattdessen auf "beides".
+  const listeAn = view !== "karte";
+  const karteAn = view !== "liste";
+
+  const zielListe = listeAn ? "karte" : view === "karte" ? undefined : undefined;
+  const zielKarte = karteAn ? "liste" : view === "liste" ? undefined : undefined;
 
   return (
     <div role="group" aria-label="Ansicht" className="flex border border-line-strong">
       <Link
-        href={buildPropertyHref(params, { ansicht: undefined, seite: undefined })}
-        aria-current={mapView ? undefined : "true"}
-        className={`${base} ${mapView ? idle : active}`}
+        href={buildPropertyHref(params, { ansicht: zielListe, seite: undefined })}
+        aria-pressed={listeAn}
+        className={`${base} ${listeAn ? an : aus}`}
       >
+        <Haken an={listeAn} />
         Liste
       </Link>
       <Link
-        href={buildPropertyHref(params, { ansicht: "karte", seite: undefined })}
-        aria-current={mapView ? "true" : undefined}
-        className={`${base} border-l border-line-strong ${mapView ? active : idle}`}
+        href={buildPropertyHref(params, { ansicht: zielKarte, seite: undefined })}
+        aria-pressed={karteAn}
+        className={`${base} border-l border-line-strong ${karteAn ? an : aus}`}
       >
+        <Haken an={karteAn} />
         Karte
       </Link>
     </div>
+  );
+}
+
+/** Kleines Kaestchen, das den Ein-/Aus-Zustand sichtbar macht. */
+function Haken({ an }: { an: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "flex h-3.5 w-3.5 shrink-0 items-center justify-center border",
+        an ? "border-white bg-white/20" : "border-line-strong",
+      )}
+    >
+      {an ? (
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m5 13 4 4L19 7" />
+        </svg>
+      ) : null}
+    </span>
   );
 }
