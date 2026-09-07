@@ -48,7 +48,7 @@ export function SubpageHeader({
           </ol>
         </nav>
         <span className="eyebrow">{eyebrow}</span>
-        <h1 className="page-title mt-4 max-w-3xl text-balance text-ink">{title}</h1>
+        <h1 className="page-title mt-4 max-w-3xl text-balance">{title}</h1>
         {lead ? <p className="lead mt-5 max-w-2xl text-pretty">{lead}</p> : null}
         {children}
       </Container>

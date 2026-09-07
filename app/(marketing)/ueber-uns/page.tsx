@@ -60,7 +60,7 @@ export default async function AboutPage() {
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <Reveal>
               <span className="eyebrow">Über uns</span>
-              <h1 className="page-title mt-4 text-balance text-primary-950">
+              <h1 className="page-title mt-4 text-balance">
                 Immobilien sind selten nur eine Frage des Preises.
               </h1>
               <div className="prose-editorial mt-6">

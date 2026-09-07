@@ -34,7 +34,7 @@ export default async function ReviewsPage() {
         <Container size="wide">
           <Reveal>
             <span className="eyebrow">Erfahrungen unserer Kunden</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance text-primary-950">
+            <h1 className="page-title mt-4 max-w-3xl text-balance">
               Was Eigentümer über uns sagen
             </h1>
             <p className="lead mt-5 max-w-2xl">

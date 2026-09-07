@@ -48,7 +48,7 @@ export default async function ContactPage({
         <Container size="wide">
           <Reveal>
             <span className="eyebrow">Kontakt</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance text-primary-950">
+            <h1 className="page-title mt-4 max-w-3xl text-balance">
               Sprechen wir über Ihre Immobilie
             </h1>
             <p className="lead mt-5 max-w-2xl">

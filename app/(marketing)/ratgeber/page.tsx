@@ -43,7 +43,7 @@ export default async function RatgeberPage({
         <Container size="wide">
           <Reveal>
             <span className="eyebrow">Ratgeber</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance text-primary-950">
+            <h1 className="page-title mt-4 max-w-3xl text-balance">
               Wissen, das vor der Entscheidung hilft
             </h1>
             <p className="lead mt-5 max-w-2xl">

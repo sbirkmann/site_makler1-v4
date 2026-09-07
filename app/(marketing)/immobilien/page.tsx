@@ -140,7 +140,7 @@ export default async function PropertiesPage({
         <Container size="wide">
           <Reveal>
             <span className="eyebrow">Aktuelle Angebote</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance text-primary-950">
+            <h1 className="page-title mt-4 max-w-3xl text-balance">
               Immobilien im Rheinland
             </h1>
             <p className="lead mt-5 max-w-2xl">
