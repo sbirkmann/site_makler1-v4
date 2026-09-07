@@ -22,6 +22,7 @@ import { SearchSplitView } from "@/components/property/SearchSplitView";
 import { SearchResultCard } from "@/components/property/SearchResultCard";
 import { SearchProfileTile } from "@/components/property/SearchProfileTile";
 import { SearchEmptyState } from "@/components/property/SearchEmptyState";
+import { CTASection } from "@/components/marketing/CTASection";
 import { Pagination } from "./Pagination";
 
 export const metadata: Metadata = {
@@ -193,8 +194,11 @@ export default async function PropertiesPage({
         <div className="mx-auto flex w-full max-w-[1552px] flex-wrap items-baseline gap-x-4 gap-y-1 px-4 py-4">
           <h1 className="page-title">Immobilien im Rheinland</h1>
           <p className="text-[0.8125rem] text-ink-muted">
-            {formatNumber(total)} {total === 1 ? "Objekt" : "Objekte"} in Köln, Bonn,
-            Düsseldorf und dem Umland
+            Häuser, Wohnungen, Grundstücke und Gewerbeobjekte in Köln, Bonn, Düsseldorf
+            und dem Umland.{" "}
+            <span className="whitespace-nowrap">
+              {formatNumber(total)} {total === 1 ? "Objekt" : "Objekte"}.
+            </span>
           </p>
         </div>
       </div>
@@ -211,6 +215,16 @@ export default async function PropertiesPage({
           <SearchResults params={params} />
         </Suspense>
       </SearchSplitView>
+
+      <CTASection
+        eyebrow="Noch nicht das Richtige gefunden?"
+        title="Wir kennen Objekte, die nie öffentlich werden."
+        description="Ein spürbarer Teil unserer Verkäufe findet ohne Portal statt. Sagen Sie uns, was Sie suchen – wir melden uns, sobald etwas Passendes in die Vermarktung geht."
+        primaryLabel="Suchprofil hinterlegen"
+        primaryHref="/suchprofil"
+        secondaryLabel="Persönlich beraten lassen"
+        secondaryHref="/kontakt"
+      />
     </>
   );
 }

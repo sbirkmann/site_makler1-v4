@@ -41,7 +41,10 @@ export function SearchFilterBar({
     "min-w-0 border-l border-line px-3 py-2 first:border-l-0";
 
   return (
-    <div className="sticky top-0 z-40 border-b border-line bg-surface">
+    <section aria-labelledby="filterleiste-titel" className="sticky top-0 z-40 border-b border-line bg-surface">
+      <h2 id="filterleiste-titel" className="sr-only">
+        Filter
+      </h2>
       <div className="mx-auto w-full max-w-[1552px] px-4">
         {/* Desktop: eine Zeile über die volle Breite */}
         <form
@@ -141,7 +144,7 @@ export function SearchFilterBar({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

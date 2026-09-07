@@ -175,7 +175,7 @@ export function FilterSheet({
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Filter"
+          aria-labelledby="filter-sheet-titel"
           className={cn(
             "absolute inset-0 flex flex-col overflow-y-auto bg-surface",
             "transition-transform duration-300 [transition-timing-function:var(--ease-out-quint)]",
@@ -183,10 +183,13 @@ export function FilterSheet({
           )}
         >
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-surface px-5 py-4">
-            <p className="flex items-center gap-2 text-[0.9375rem] font-semibold uppercase tracking-[0.04em] text-primary-800">
+            <h2
+              id="filter-sheet-titel"
+              className="flex items-center gap-2 text-[0.9375rem] font-semibold uppercase tracking-[0.04em] text-primary-800"
+            >
               <IconSliders size={18} className="text-[var(--color-accent-onwhite)]" />
               Filter
-            </p>
+            </h2>
             <button
               type="button"
               onClick={() => setOpen(false)}
