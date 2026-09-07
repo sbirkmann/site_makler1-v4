@@ -86,7 +86,7 @@ export function SearchBandOlive({ cities }: { cities: string[] }) {
 
             <button
               type="submit"
-              className="h-11 shrink-0 bg-accent-500 px-8 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-600"
+              className="h-11 shrink-0 bg-[var(--color-accent-onwhite)] px-8 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-700"
             >
               Suchen
             </button>

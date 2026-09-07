@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Temporäre Prüf-Skripte
 /*.mjs
+
+# Referenz-Screenshots: nur interne Analyse, nicht ins Repo
+/design-review/reference/

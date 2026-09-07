@@ -109,7 +109,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
                 nicht; dort steht dieselbe Aktion kompakt. */}
             <Link
               href="/immobilienbewertung"
-              className="hidden h-[var(--header-height)] shrink-0 items-center gap-2 bg-accent-500 px-4 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-600 lg:flex 2xl:hidden"
+              className="hidden h-[var(--header-height)] shrink-0 items-center gap-2 bg-[var(--color-accent-onwhite)] px-4 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-700 lg:flex 2xl:hidden"
             >
               <IconValuation size={17} />
               Bewerten
@@ -119,7 +119,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
                 Punkt im Header, der Farbe traegt. */}
             <Link
               href="/immobilienbewertung"
-              className="hidden h-[var(--header-height)] shrink-0 flex-col justify-center gap-0.5 bg-accent-500 px-5 text-white transition-colors hover:bg-accent-600 2xl:flex"
+              className="hidden h-[var(--header-height)] shrink-0 flex-col justify-center gap-0.5 bg-[var(--color-accent-onwhite)] px-5 text-white transition-colors hover:bg-accent-700 2xl:flex"
             >
               <span className="text-[0.625rem] font-light uppercase tracking-[0.14em] opacity-90">
                 Jetzt kostenfrei

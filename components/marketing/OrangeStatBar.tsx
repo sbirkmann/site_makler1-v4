@@ -17,7 +17,7 @@ export function OrangeStatBar({
   label?: string;
 }) {
   return (
-    <section className="bg-accent-500">
+    <section className="bg-[var(--color-accent-onwhite)]">
       <Container size="wide">
         <Link
           href={href}
@@ -28,7 +28,7 @@ export function OrangeStatBar({
           </p>
 
           <p className="flex shrink-0 items-baseline gap-2.5 text-white">
-            <span className="text-[0.6875rem] font-light uppercase tracking-[0.16em] opacity-80">
+            <span className="text-[0.6875rem] font-normal uppercase tracking-[0.16em]">
               Aktuell
             </span>
             <span className="font-[family-name:var(--font-display)] text-[2rem] font-semibold leading-none sm:text-[2.5rem]">

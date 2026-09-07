@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 type Variant = "primary" | "secondary" | "outline" | "ghost" | "accent" | "inverse";
 type Size = "sm" | "md" | "lg";
 
-// Dondorf-Aesthetik: Buttons in Versalien, kompakte Laufweite, kaum Rundung.
+// Buttons in Versalien, kompakte Laufweite, kaum Rundung – siehe DESIGN-TOKENS.md.
 const base =
   "inline-flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.06em] " +
   "transition-all duration-200 ease-out select-none " +
@@ -15,11 +15,11 @@ const base =
 const variants: Record<Variant, string> = {
   // Haupt-CTA in Markenorange – wie auf der Referenz der auffaelligste Punkt.
   primary:
-    "bg-accent-500 text-white shadow-[var(--shadow-subtle)] hover:bg-accent-600 hover:shadow-[var(--shadow-card)] active:translate-y-px focus-visible:outline-accent-600",
+    "bg-[var(--color-accent-onwhite)] text-white shadow-[var(--shadow-subtle)] hover:bg-accent-700 hover:shadow-[var(--shadow-card)] active:translate-y-px focus-visible:outline-accent-700",
   secondary:
     "bg-surface-sunken text-primary-900 hover:bg-line-strong/60 active:translate-y-px focus-visible:outline-primary-600",
   outline:
-    "border-2 border-accent-500 bg-transparent text-accent-600 hover:bg-accent-500 hover:text-white active:translate-y-px focus-visible:outline-accent-600",
+    "border-2 border-[var(--color-accent-onwhite)] bg-transparent text-[var(--color-accent-onwhite)] hover:bg-[var(--color-accent-onwhite)] hover:text-white active:translate-y-px focus-visible:outline-accent-700",
   ghost:
     "bg-transparent text-primary-800 hover:bg-primary-50 active:translate-y-px focus-visible:outline-primary-600",
   // Zweitfarbe: das ruhige Oliv der Marke.

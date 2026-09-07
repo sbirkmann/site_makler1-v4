@@ -68,7 +68,7 @@ export function MapConsent({
       <button
         type="button"
         onClick={accept}
-        className="bg-accent-500 px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-600"
+        className="bg-[var(--color-accent-onwhite)] px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-white transition-colors hover:bg-accent-700"
       >
         Karte laden
       </button>

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* =========================================================================
-   Dondorf-Aesthetik – Design System (v4)
-   Referenz: dondorf.de (Peter Dondorf Immobilien, Aachen)
+   WohnWert Immobilien – Design System (v4)
+   Gestaltungsreferenz und gemessene Werte: siehe DESIGN-TOKENS.md
    Primary   Oliv/Dunkelgruen #3E4018 – Navigation, Flaechen, Footer, Headlines
    Accent    Orange #FF6D00        – H1, Buttons, Call-to-Action, Versalien
    Secondary Warmes Beige #F3ECE7  – ruhige Abschnittsflaeche zwischen Weiss
@@ -46,6 +46,12 @@
   --color-accent-700: #b84a00;
   --color-accent-800: #8f3a00;
   --color-accent-900: #6b2c00;
+
+  /* Flaeche fuer weisse Schrift: #ff6d00 erreicht gegen Weiss nur 2.82:1 und
+     faellt damit unter WCAG AA (4.5:1 noetig). Dieser Ton kommt auf 4.56:1
+     und bleibt im Markenorange. Reine Dekorflaechen ohne Text duerfen
+     weiterhin --color-accent-500 nutzen. */
+  --color-accent-onwhite: #c85000;
 
   /* Neutrale Flaechen: reines Weiss, sehr helles Grau, dunkles Anthrazit */
   --color-surface: #ffffff;
