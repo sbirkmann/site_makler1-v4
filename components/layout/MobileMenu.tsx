@@ -95,6 +95,11 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         open ? "pointer-events-auto" : "pointer-events-none",
       )}
       aria-hidden={!open}
+      // Das Panel wird nur aus dem Bild geschoben, bleibt also im DOM. Ohne
+      // `inert` blieben Schliessen-Button und Navigationslinks im geschlossenen
+      // Zustand fokussierbar, obwohl der Container aria-hidden ist
+      // (Pruefung: aria-hidden-focus).
+      inert={!open}
     >
       <div
         onClick={onClose}

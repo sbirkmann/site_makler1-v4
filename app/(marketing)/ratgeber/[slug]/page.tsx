@@ -238,6 +238,11 @@ export default async function RatgeberArticlePage({
                   <article className="group flex h-full flex-col">
                     <Link
                       href={`/ratgeber/${item.slug}`}
+                      // Rein dekorativer Bildlink: Der Titel darunter verweist
+                      // auf dasselbe Ziel. Ohne aria-hidden/tabIndex meldete
+                      // die Pruefung einen Link ohne Namen (link-name).
+                      aria-hidden="true"
+                      tabIndex={-1}
                       className="relative block aspect-[16/10] overflow-hidden rounded-[var(--radius-lg)] bg-surface-sunken"
                     >
                       {item.coverImage ? (

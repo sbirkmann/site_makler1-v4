@@ -76,7 +76,7 @@ export function SearchResultCard({
         </p>
       ) : null}
 
-      <div className="relative p-4 [text-shadow:0_2px_2px_rgba(0,0,0,0.8)]">
+      <div className="relative px-4 pb-4 pt-12 [text-shadow:0_2px_2px_rgba(0,0,0,0.8)]">
         <h3 className="text-[0.9375rem] font-semibold uppercase leading-snug tracking-[0.02em] text-white">
           <Link href={`/immobilien/${property.slug}`} className="before:absolute before:inset-0">
             {property.title}

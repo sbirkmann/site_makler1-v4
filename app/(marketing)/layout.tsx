@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { HeaderSwitch } from "@/components/layout/HeaderSwitch";
+import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { QuickActionRail } from "@/components/layout/QuickActionRail";
 import { isDemoSite, site } from "@/lib/site";
@@ -39,7 +39,7 @@ export default function MarketingLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <HeaderSwitch />
+      <Header overlay={false} />
       <main id="hauptinhalt" className="flex-1">
         {children}
       </main>
