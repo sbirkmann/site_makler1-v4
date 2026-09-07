@@ -97,8 +97,15 @@
   --header-height: 5.5rem;
 }
 
-* {
-  border-color: var(--color-line);
+/* Vorgabe fuer Rahmenfarben. Muss in @layer base stehen: ungelayerte
+   Regeln schlagen sonst jede Utility-Klasse, und `border-accent-500`
+   waere wirkungslos. */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
 }
 
 html {

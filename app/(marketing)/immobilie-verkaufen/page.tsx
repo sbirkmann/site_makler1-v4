@@ -58,6 +58,8 @@ export default function SellPage() {
           "Persönliche Rückmeldung innerhalb eines Werktages",
           "Keine automatisierte Werbung, keine Weitergabe an Dritte",
         ]}
+        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Hausmodell mit Schlüsselbund auf einem Tisch"
       >
         <ValuationFunnel variant="VERKAUF" />
       </FunnelLayout>

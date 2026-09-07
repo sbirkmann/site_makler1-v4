@@ -20,6 +20,7 @@ import {
 } from "@/components/property/PropertyGrid";
 import { PropertyFilters } from "@/components/property/PropertyFilters";
 import { CTASection } from "@/components/marketing/CTASection";
+import { PageHero } from "@/components/marketing/PageHero";
 import { PropertyOverviewMap } from "@/components/map/PropertyOverviewMap";
 import type { MapMarker } from "@/components/map/PropertyMap";
 import { PropertySort } from "./PropertySort";
@@ -136,23 +137,15 @@ export default async function PropertiesPage({
 
   return (
     <>
-      <Section className="pb-0">
-        <Container size="wide">
-          <Reveal>
-            <span className="eyebrow">Aktuelle Angebote</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance">
-              Immobilien im Rheinland
-            </h1>
-            <p className="lead mt-5 max-w-2xl">
-              Häuser, Wohnungen, Grundstücke und Gewerbeobjekte in Köln, Bonn, Düsseldorf und
-              dem Umland. Ein Teil unserer Objekte wird ohne öffentliche Vermarktung vermittelt –
-              sprechen Sie uns an, wenn Sie gezielt suchen.
-            </p>
-          </Reveal>
-        </Container>
-      </Section>
+      <PageHero
+        eyebrow="Aktuelle Angebote"
+        title="Immobilien im Rheinland"
+        lead="Häuser, Wohnungen, Grundstücke und Gewerbeobjekte in Köln, Bonn, Düsseldorf und dem Umland."
+        image="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Wohnhaus mit Vorgarten"
+      />
 
-      <Section className="pt-8">
+      <Section className="pt-10">
         <Container size="wide">
           <div className="grid gap-8 lg:grid-cols-[19rem_1fr] lg:gap-12">
             <aside>

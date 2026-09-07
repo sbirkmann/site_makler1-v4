@@ -76,6 +76,8 @@ export default function ValuationPage() {
           "Rückmeldung innerhalb eines Werktages",
           "Auch sinnvoll, wenn ein Verkauf noch weit entfernt ist",
         ]}
+        image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Taschenrechner und Unterlagen zur Wertermittlung"
       >
         <ValuationFunnel variant="BEWERTUNG" />
       </FunnelLayout>

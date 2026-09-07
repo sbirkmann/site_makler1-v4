@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { findReviews, getReviewSummary } from "@/lib/repositories/reviews";
 import { Container, Section } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { PageHero } from "@/components/marketing/PageHero";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import { ReviewSummary } from "@/components/reviews/ReviewSummary";
 import { CTASection } from "@/components/marketing/CTASection";
@@ -30,20 +31,16 @@ export default async function ReviewsPage() {
 
   return (
     <>
+      <PageHero
+        eyebrow="Erfahrungen unserer Kunden"
+        title="Was Eigentümer über uns sagen"
+        lead="Jede Bewertung stammt von einer Person, die wir tatsächlich begleitet haben – auch die kritischen Stimmen lassen wir stehen."
+        image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Beratungsgespräch am Besprechungstisch"
+      />
+
       <Section className="pb-0">
         <Container size="wide">
-          <Reveal>
-            <span className="eyebrow">Erfahrungen unserer Kunden</span>
-            <h1 className="page-title mt-4 max-w-3xl text-balance">
-              Was Eigentümer über uns sagen
-            </h1>
-            <p className="lead mt-5 max-w-2xl">
-              Jede Bewertung stammt von einer Person, die wir tatsächlich begleitet haben –
-              beim Verkauf, beim Kauf, bei der Vermietung oder bei einer Bewertung. Auch die
-              kritischen Stimmen lassen wir stehen.
-            </p>
-          </Reveal>
-
           <Reveal delay={100}>
             <div className="mt-10">
               <ReviewSummary

@@ -28,6 +28,8 @@ export default function SearchProfilePage() {
         "Ihre Kriterien lassen sich jederzeit anpassen",
         "In fünf Minuten ausgefüllt",
       ]}
+      image="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80"
+      imageAlt="Heller Wohnraum mit Blick in den Garten"
     >
       <SearchProfileFunnel />
     </FunnelLayout>
