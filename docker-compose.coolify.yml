@@ -15,6 +15,14 @@ services:
       GEOCODER_URL: ${GEOCODER_URL:-https://nominatim.openstreetmap.org/search}
     depends_on: [sftpgo]
     volumes: ["uploads:/app/public/uploads"]
+    # Ohne Healthcheck bleibt ein haengender Container unbemerkt stehen und
+    # liefert dauerhaft Gateway Timeouts, statt neu gestartet zu werden.
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     networks: [default, coolify]
   sftpgo:
     image: drakkan/sftpgo:v2.6.6
